@@ -1,7 +1,7 @@
 CREATE TABLE User (
 	id					INTEGER PRIMARY KEY AUTOINCREMENT,
 	name				NVARCHAR2 (64) NOT NULL,
-	bithdate			DATE NOT NULL,
+	birthdate			DATE NOT NULL,
 	email				NVARCHAR2 (64) NOT NULL,
 	password			NVARCHAR2 (64) NOT NULL
 );
@@ -29,15 +29,12 @@ CREATE TABLE Comment (
 );
 
 --$result = md5($salt.$string); var result = md5(salt+string); SALT + MD5 (salt before)
-INSERT INTO User(name, bithdate, email, password) VALUES('Rui', '1994-12-01', 'rui@gmail.com', '907c7afd57be493757f13ccd1dd45dddf02db069');
-INSERT INTO User(name, bithdate, email, password) VALUES('Antonio', '1995-05-11', 'antonio@gmail.com', 'a08f08bac39aeae6c9580ade7aa8387b5a0e7428');
+INSERT INTO User(name, birthdate, email, password) VALUES('Rui', '1994-12-01', 'rui@gmail.com', '8a5b4ac36aba7445422abac5ac44667da36df6bcb3b8106821612c74c5764c14');
+INSERT INTO User(name, birthdate, email, password) VALUES('Antonio', '1995-05-11', 'antonio@gmail.com', '4ee3679892e6ac5a5b513eba7fd529d363d7a96508421c5dbd44b01b349cf514');
 
 INSERT INTO Event(idUser, eventDate, description, eventType, isPublic) VALUES(1, '2015-12-11', 'Uma cena', 'Concerto', 1);
 
 INSERT INTO InvitationList(idEvent, idUser) VALUES(1, 1);
 INSERT INTO InvitationList(idEvent, idUser) VALUES(1, 2);
 
-INSERT INTO Comment(idEvent, idUser, description) VALUES(1, 2, 'Não vou');
-
-
-
+INSERT INTO Comment(idEvent, idUser, description) VALUES(1, 2, 'Nï¿½o vou');
