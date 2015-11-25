@@ -16,14 +16,37 @@ function getCookie(cname) {
     return "";
 }
 
-function checkCookie() {
-    var username=getCookie("username");
-    if (username!="") {
-        alert("Welcome again " + username);
-    }else{
-        username = prompt("Please enter your name:", "");
-        if (username != "" && username != null) {
-            setCookie("username", username, 365);
-        }
+function checkCookie(fn) {
+    var token = getCookie('token');
+    var postData =
+    {
+      "token":token
     }
+    $.ajax({
+      type: "POST",
+      url: "api/user/token.php",
+      contentType: "application/json",
+      data: JSON.stringify(postData),
+      dataType: "json",
+      success: function(data){
+        if (data.error)
+          fn(true);
+        else {
+          fn(false);
+        }
+      },
+      error: function(e){
+        console.log(e);
+      }
+    });
 }
+
+$(document).ready(function() {
+    checkCookie(function (loggedin) {
+      if (loggedin == true)
+        $("#logout").hide();
+      else {
+        $("#logout").show();
+      }
+    })
+});

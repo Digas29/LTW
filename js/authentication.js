@@ -14,11 +14,12 @@ $(function (){
       data: JSON.stringify(postData),
       dataType: "json",
       success: function(data){
-        console.log(data);
         if (data.error)
-        alert('error');
+          alert('error');
         else {
           alert('sucess');
+          setCookie('token',data.token,1);
+          location=location;
         }
       },
       error: function(e){

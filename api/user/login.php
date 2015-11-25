@@ -8,9 +8,11 @@ if(isset($body)){
 	$json = json_decode($body);
 	$result = userAcess($json->email, $json->password);
 	if(isset($result)&&!empty($result)){
-		$message = array('success' => 'user login');
+		$token = md5(uniqid(rand(), true));
 		$_SESSION['name'] = $result[0]['name'];
 		$_SESSION['email'] = $result[0]['email'];
+		$_SESSION['token'] = $token;
+		$message = array('success' => 'user login','token' => $_SESSION['token']);
 	}
 	else{
 		$message = array('error' => 'login rejected');
