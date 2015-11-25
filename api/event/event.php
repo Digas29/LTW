@@ -30,7 +30,7 @@
 
 	function updateEvent($id, $title, $eventDate, $description, $eventType, $isPublic){
 		global $db;
-		$stmt = $db->prepare('UPDATE Event SET $title = :title, eventDate = :eventDate, description = :description, eventType = :eventType, isPublic = :isPublic WHERE id = :id');
+		$stmt = $db->prepare('UPDATE Event SET title = :title, eventDate = :eventDate, description = :description, eventType = :eventType, isPublic = :isPublic WHERE id = :id');
 		$stmt->bindParam(':title', $title, PDO::PARAM_STR);
 		$stmt->bindParam(':eventDate', $eventDate, PDO::PARAM_STR);
 		$stmt->bindParam(':description', $description, PDO::PARAM_STR);
@@ -39,6 +39,18 @@
 		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		try {
 			$stmt->execute();
+		} catch (PDOException $e) {
+			return $e->getMessage();
+		}
+	}
+	function getEventsByIdUser($idUser){
+		global $db;
+		$stmt = $db->prepare('SELECT * FROM Event WHERE idUser = :idUser');
+		$stmt->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+		try {
+			$stmt->execute();
+			$result = $stmt->fetch();
+			return $result;
 		} catch (PDOException $e) {
 			return $e->getMessage();
 		}
