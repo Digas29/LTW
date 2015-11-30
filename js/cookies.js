@@ -50,3 +50,14 @@ $(document).ready(function() {
       }
     })
 });
+
+
+/*function validCookie() {
+  checkCookie(function (loggedin) {
+    if (loggedin == true)
+      $("#logout").hide();
+    else {
+      $("#logout").show();
+    }
+  })
+}*/

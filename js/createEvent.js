@@ -2,7 +2,7 @@ $(function (){
   $("#create").on('click' , function(){
     var idUser=2; // CORRIGIR
     var title=$('#title').val();
-    var eventDate=$('#eventDate').val();
+    var eventDate=$('#eventDate').val() + " " + $('#eventTime').val();
     var description=$('#description').val();
     var eventType=$('#eventType').val();
     var isPublic;
@@ -27,7 +27,6 @@ $(function (){
       data: JSON.stringify(postData),
       dataType: "json",
       success: function(data){
-        console.log(data);
         if (data.error)
           alert('error');
         else {

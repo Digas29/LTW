@@ -4,7 +4,7 @@
   $body = file_get_contents('php://input');
   if(isset($body)){
     $json = json_decode($body);
-    createComment($json->idEvent, $json->idUser, $json->description);
+    createComment($json->idEvent, $json->idUser, $json->description, $json->commentDate);
     $message = array('success' => 'Comment was successfully created');
   } else {
   $message = array('error' => 'Unexpected exit');

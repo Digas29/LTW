@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="style.css">
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="js/cookies.js"></script>
+  <p>This is the header</p>
 </head>
 <body>
   <div id="logout" style="display:none">

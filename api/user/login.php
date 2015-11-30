@@ -11,6 +11,7 @@ if(isset($body)){
 		$token = md5(uniqid(rand(), true));
 		$_SESSION['name'] = $result[0]['name'];
 		$_SESSION['email'] = $result[0]['email'];
+		$_SESSION['id'] = $result[0]['id'];
 		$_SESSION['token'] = $token;
 		$message = array('success' => 'user login','token' => $_SESSION['token']);
 	}

@@ -4,7 +4,7 @@
 	function userAcess($email, $password){
 		global $db;
 		$securePassword = hash("sha256", $password);
-		$stmt = $db->prepare("SELECT name, email FROM User WHERE email = :email AND password = :securePassword");
+		$stmt = $db->prepare("SELECT name, email, id FROM User WHERE email = :email AND password = :securePassword");
 		$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 		$stmt->bindParam(':securePassword', $securePassword, PDO::PARAM_STR);
 		try {
@@ -33,17 +33,30 @@
 
 	function existsUser($email){
     global $db;
-    $stmt = $db->prepare('SELECT email FROM User WHERE email = :email');
+    $stmt = $db->prepare('SELECT id, email FROM User WHERE email = :email');
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     try {
       $stmt->execute();
     } catch (PDOException $e) {
       return false;
     }
-    $result = $stmt->fetchAll();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if (isset($result)&&!empty($result))
-    	return true;
+    	return $result;
 		else
 			return false;
   }
+
+	function getUserById($id){
+		global $db;
+		$stmt = $db->prepare("SELECT name, birthdate, email FROM User WHERE User.id = :id");
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		try {
+			$stmt->execute();
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $result;
+		} catch (PDOException $e) {
+			return $e->getMessage();
+		}
+	}
 ?>

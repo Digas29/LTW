@@ -6,4 +6,9 @@
   <input type='password' placeholder='Confirm password' id='passwordConfirmation'>
   <button id='submit'>Register</button>
 </div>
+
+<div class="authentication">
+	<p><a id="link-authentication" href="?page=authentication">Authentication an account</a></p>
+</div>
+
 <script src="js/registation.js"></script>

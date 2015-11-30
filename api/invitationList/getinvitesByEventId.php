@@ -1,11 +1,10 @@
 <?php
   session_start();
-  include_once('comment.php');
+  include_once('invitationList.php');
   $body = file_get_contents('php://input');
   if(isset($body)){
     $json = json_decode($body);
-    updateComment($json->id, $json->description);
-    $message = array('success' => 'Comment was successfully updated');
+    $message = getInvitesByEventId($json->id);
   } else {
   $message = array('error' => 'Unexpected exit');
   }

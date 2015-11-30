@@ -19,7 +19,8 @@ $(function (){
         else {
           alert('sucess');
           setCookie('token',data.token,1);
-          location=location;
+          $(location).attr('href','?page=user');
+          console.log($(location));
         }
       },
       error: function(e){

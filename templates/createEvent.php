@@ -1,6 +1,7 @@
 <div id="creatEvent">
   <input type='text' placeholder='Title' id='title'>
   <input type='date' placeholder='Event date' id='eventDate'>
+  <input type='time' placeholder='Event time' id='eventTime'>
   <input type='text' placeholder='Description' id='description'>
   <input type='text' placeholder='Event type' id='eventType'>
   <input type='radio' value='Public' name='isPrivate' id='isPublic' checked="1">Public

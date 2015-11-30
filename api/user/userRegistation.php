@@ -16,13 +16,3 @@
   $JSONresponse = json_encode($message);
   echo $JSONresponse;
 ?>
-
-
-/*
-{
-    "name":"JP Dias",
-    "birthdate": "1993-04-12",
-    "email": "jpdias@gmail.com",
-    "password": "jp",
-}
-*/

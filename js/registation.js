@@ -7,7 +7,7 @@ $(function (){
     var passwordConfirmation=$('#passwordConfirmation').val();
     var postData =
     {
-      "name":email,
+      "name":name,
       "birthdate":birthdate,
       "email":email,
       "password":password
@@ -23,11 +23,13 @@ $(function (){
       data: JSON.stringify(postData),
       dataType: "json",
       success: function(data){
-        console.log(data);
-        if (data.error)
-        alert('error');
+        if (data.error){
+          alert('error');
+          location=location;
+        }
         else {
           alert('sucess');
+          $(location).attr('href','index.php?page=authentication');
         }
       },
       error: function(e){
