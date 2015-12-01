@@ -7,7 +7,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="eventInformation" data-id="2">
+<div class="eventInformation" data-id="1">
   <p><b>Event info:</b></p>
   <button id='deleteEvent'>Delete</button>
 <!--

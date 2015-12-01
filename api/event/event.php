@@ -60,6 +60,7 @@
 	function getEventsById($id){
 		global $db;
 		$stmt = $db->prepare("SELECT User.id, User.name, Event.title, Event.eventDate, Event.description, Event.eventType, Event.isPublic FROM Event, User WHERE Event.id = :id AND User.id = Event.idUser");
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		try {
 			$stmt->execute();
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);

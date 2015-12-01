@@ -1,9 +1,13 @@
 <div class="userInformation">
   <p><b>User info:</b></p>
-  <button id='deleteUser'>Delete</button>
+  <p>
+    <button id='deleteUser'>Delete user</button>
+    <button id='updateUser'>Update user</button>
+  </p>
+  <p><a id="link-changePassword" href="?page=changePassword">Change password</a></p>
   <form action="api/user/upload.php" method="post" enctype="multipart/form-data">
     <input type="file" name="image">
-    <input type="submit" value="Upload">
+    <input id="upload" type="submit" value="Upload">
   </form>
 </div>
 
