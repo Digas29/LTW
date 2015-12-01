@@ -1,34 +1,19 @@
 <?php
+include_once('api/config.php');
 
-
+session_start();
 
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 'authentication';
 
-$mandatoryLogin = array('createEvent', 'event', 'eventManager', 'user');
+$mandatoryLogin = array('createEvent', 'event', 'eventManager', 'user', 'changePassword');
 
-/*
-echo "
-  <script src=\"js/cookies.js\">
-    checkCookie(fn);
-    $.get('?page=registation', {flag: fn});
-</script>";
-print_r($_GET);
-$flag = $_GET['flag'];
-*/
-
-/*
 foreach ($mandatoryLogin as $page) {
   if ($currentPage === $page && $_SESSION['token'] === null) {
-    echo "
-    <script type=\"text/javascript\">
-    window.alert('You are not signed in.');
-    window.location.href = 'index.php';
-    </script>
-    ";
+    header('Location: '. BASE_PATH);
     $currentPage = 'authentication';
     break;
   }
-}*/
+}
 
 include 'templates/header.php';
 
@@ -50,6 +35,9 @@ switch ($currentPage) {
   break;
   case 'event':
   include 'templates/event.php';
+  break;
+  case 'changePassword':
+  include 'templates/changePassword.php';
   break;
   default:
   include 'templates/authentication.php';
