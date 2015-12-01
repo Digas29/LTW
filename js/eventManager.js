@@ -12,10 +12,9 @@ jQuery(document).ready(function() {
   });
 
 
-  var id= 1;
-  var postData =
-  {
-    "idUser":id
+  var id = localStorage.getItem('loggedID');
+  var postData = {
+    "idUser" : id
   }
   $.ajax({
     type: "POST",

@@ -1,6 +1,6 @@
 $(function (){
   $("#deleteUser").on('click' , function(){
-    var id=1; // CORRIGIR --------------------------------------------------------------------------------------
+    var id = localStorage.getItem('userID');
     var postData =
     {
       "id":id
@@ -33,11 +33,8 @@ $(function (){
     });
   });
 
-
-
-
   $(document).ready(function(){
-    var id=1; // CORRIGIR --------------------------------------------------------------------------------------
+    var id = localStorage.getItem('userID');
     var postData =
     {
       "id":id

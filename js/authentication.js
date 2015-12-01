@@ -19,6 +19,8 @@ $(function (){
         else {
           alert('sucess');
           setCookie('token',data.token,1);
+          localStorage.setItem('loggedID', data.id);
+          localStorage.setItem('userID', data.id);
           $(location).attr('href','?page=user');
           console.log($(location));
         }
