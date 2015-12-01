@@ -108,7 +108,7 @@ $(function (){
       dataType: "json",
       success: function(data){
         if (data.error)
-        alert('error');
+          alert('error');
         else {
           var result = "<p>Title: " + data.title + "</p>"
           + "<p>Owner: " + data.name + "</p>"

@@ -59,4 +59,59 @@
 			return $e->getMessage();
 		}
 	}
+
+	function updateUser($id, $name, $birthdate, $email){
+		global $db;
+		$stmt = $db->prepare('UPDATE User SET name = :name, birthdate = :birthdate, email = :email WHERE id = :id');
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+		$stmt->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
+		$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+		try {
+			$stmt->execute();
+		} catch (PDOException $e) {
+			return $e->getMessage();
+		}
+	}
+
+	function changePassword($id, $password){
+		global $db;
+		$securePassword = hash("sha256", $password);
+		$stmt = $db->prepare('UPDATE User SET password = :password WHERE id = :id');
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		$stmt->bindParam(':password', $securePassword, PDO::PARAM_STR);
+		try {
+			$stmt->execute();
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $result;
+		} catch (PDOException $e) {
+			return $e->getMessage();
+		}
+	}
+
+	function changePasswordByEmail($email, $password){
+		global $db;
+		$securePassword = hash("sha256", $password);
+		$stmt = $db->prepare('UPDATE User SET password = :password WHERE email = :email');
+		$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+		$stmt->bindParam(':password', $securePassword, PDO::PARAM_STR);
+		try {
+			$stmt->execute();
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			return $result;
+		} catch (PDOException $e) {
+			return $e->getMessage();
+		}
+	}
+
+	function deleteUser($id){
+		global $db;
+		$stmt = $db->prepare('DELETE FROM User WHERE id = :id');
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		try {
+			$stmt->execute();
+		} catch (PDOException $e) {
+			return $e->getMessage();
+		}
+	}
 ?>

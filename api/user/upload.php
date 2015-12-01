@@ -32,4 +32,7 @@
   $medium = imagecreatetruecolor($mediumwidth, $mediumheight);
   imagecopyresized($medium, $original, 0, 0, 0, 0, $mediumwidth, $mediumheight, $width, $height);
   imagejpeg($medium, $mediumFileName);
+
+  $url = BASE_PATH;
+  header("Location: $url");
 ?>

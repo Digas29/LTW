@@ -3,7 +3,7 @@
   <title>LTW Events</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
-  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="js/cookies.js"></script>
   <p>This is the header</p>
 </head>
