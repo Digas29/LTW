@@ -1,0 +1,119 @@
+
+* { box-sizing: border-box }
+
+body {
+  height: 18.75em;
+  width: 25em;
+  background: #fff;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  width: 450px;
+  font-size: 16px;
+  background: #495C70;
+  padding: 30px 30px 15px 30px;
+  border: none;
+  background: url("login-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+#logout #logout {
+	margin-bottom: 0.5em;
+	font-size:1em;
+	font-style: italic;
+	float:right;
+
+	background: #3F48CC;
+    border: none;
+    padding: 0px 10px 0px 10px;
+	border-radius: 25px;
+    color: #A8BACE;
+
+	margin-bottom:1em;
+}
+
+#logout #logout:hover {
+	color:black;
+}
+
+.authentication, .accountOptions {
+  height: 6.25em;
+  width: 100%;
+}
+
+.authentication #email:focus {
+	border-bottom: 1px dashed #D9FFA9
+}
+
+.authentication #email {
+	color:white;
+	float:left;
+	clear:both;
+	margin-bottom: 0.5em;
+
+	font-style: italic;
+    padding: 0px 0px 0px 0px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px dashed #83A4C5;
+    width: 275px;
+    overflow: hidden;
+    resize:none;
+    height:20px;
+}
+
+.authentication #password:focus {
+	border-bottom: 1px dashed #D9FFA9
+}
+
+.authentication #password {
+	color:white;
+	float:left;
+	clear:both;
+	margin-bottom: 0.5em;
+
+	font-style: italic;
+    padding: 0px 0px 0px 0px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px dashed #83A4C5;
+    width: 275px;
+    overflow: hidden;
+    resize:none;
+    height:20px;
+}
+
+.authentication #submit {
+	float:left;
+	clear:both;
+	margin-bottom: 0.5em;
+	font-size:1.5em;
+	font-style: italic;
+
+	background: #3F48CC;
+    border: none;
+    padding: 0px 10px 0px 10px;
+	border-radius: 25px;
+    color: #A8BACE;
+}
+
+.authentication #submit:hover {
+	color:white;
+}
+
+.accountOptions {
+	margin-top: 1em;
+}
+
+.accountOptions #link-registation {
+	float:left;
+	clear:both;
+}
+
+.accountOptions #passwordRecuperation {
+	float:right;
+}
