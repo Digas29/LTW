@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
   });
 
 
-  var id= 1;
+  var id= $('.header').data("id");
   var postData =
   {
     "idUser":id
@@ -36,7 +36,7 @@ jQuery(document).ready(function() {
             result += "<td> Public </td>";
           else
             result += "<td> Private </td>";
-          result += "<th><a href='?page=event&id=" + data[i].id + "'>See more</a></th></tr>";
+          result += "<td><a href='?page=event&id=" + data[i].id + "'>See more</a></td></tr>";
         }
         $("#myEventsTable").append(result);
       }
@@ -67,7 +67,8 @@ jQuery(document).ready(function() {
           result += "<tr><td>" + data[i].title + "</td>"+
           "<td>" + data[i].name + "</td>"+
           "<td>" + data[i].eventDate + "</td>"+
-          "<td>" + data[i].eventType + "</td></tr>";
+          "<td>" + data[i].eventType + "</td>"+
+          "<td><a href='?page=event&id=" + data[i].id + "'>See more</a></td></tr>";
         }
         $("#publicEventsTable").append(result);
       }
@@ -97,7 +98,8 @@ jQuery(document).ready(function() {
           result += "<tr><td>" + data[i].title + "</td>"+
           "<td>" + data[i].name + "</td>"+
           "<td>" + data[i].eventDate + "</td>"+
-          "<td>" + data[i].eventType + "</td></tr>";
+          "<td>" + data[i].eventType + "</td>"+
+          "<td><a href='?page=event&id=" + data[i].id + "'>See more</a></td></tr>";
         }
         $("#privateEventsTable").append(result);
       }
@@ -128,9 +130,10 @@ jQuery(document).ready(function() {
           "<td>" + data[i].eventDate + "</td>"+
           "<td>" + data[i].eventType + "</td>";
           if (data[i].isPublic == 1)
-            result += "<td> Public </td></tr>";
+            result += "<td> Public </td>";
           else
-            result += "<td> Private </td> </tr>";
+            result += "<td> Private </td>";
+          result += "<td><a href='?page=event&id=" + data[i].id + "'>See more</a></td></tr>";
         }
         $("#allEventsTable").append(result);
       }
