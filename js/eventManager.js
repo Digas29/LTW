@@ -32,10 +32,11 @@ jQuery(document).ready(function() {
           result += "<tr><td>" + data[i].title + "</td>"+
           "<td>" + data[i].eventDate + "</td>"+
           "<td>" + data[i].eventType + "</td>";
-          if (data[i].isPublic)
-          result += "<td> Public </td></tr>";
+          if (data[i].isPublic == 1)
+            result += "<td> Public </td>";
           else
-          result += "<td> Private </td> </tr>";
+            result += "<td> Private </td>";
+          result += "<th><a href='?page=event&id=" + data[i].id + "'>See more</a></th></tr>";
         }
         $("#myEventsTable").append(result);
       }
@@ -126,7 +127,7 @@ jQuery(document).ready(function() {
           "<td>" + data[i].name + "</td>"+
           "<td>" + data[i].eventDate + "</td>"+
           "<td>" + data[i].eventType + "</td>";
-          if (data[i].isPublic)
+          if (data[i].isPublic == 1)
             result += "<td> Public </td></tr>";
           else
             result += "<td> Private </td> </tr>";

@@ -4,9 +4,8 @@
   session_start();
   $id = $_SESSION['id'];
 
-  $originalFileName = BASE_PATH . "/images/originals/$id.jpg";
-  $smallFileName = BASE_PATH . "/images/thumbs_small/$id.jpg";
-  $mediumFileName = BASE_PATH . "/images/thumbs_medium/$id.jpg";
+  $originalFileName = BASE_PATH . "/images/users/originals/$id.jpg";
+  $smallFileName = BASE_PATH . "/images/users/thumbs_small/$id.jpg";
 
   move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
 
@@ -23,15 +22,6 @@
 
   $mediumwidth = $width;
   $mediumheight = $height;
-
-  if ($mediumwidth > 400) {
-    $mediumwidth = 400;
-    $mediumheight = $mediumheight * ( $mediumwidth / $width );
-  }
-
-  $medium = imagecreatetruecolor($mediumwidth, $mediumheight);
-  imagecopyresized($medium, $original, 0, 0, 0, 0, $mediumwidth, $mediumheight, $width, $height);
-  imagejpeg($medium, $mediumFileName);
 
   $url = BASE_PATH;
   header("Location: $url");

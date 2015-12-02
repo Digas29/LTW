@@ -17,10 +17,8 @@ $(function (){
         if (data.error)
           alert('error');
         else {
-          alert('sucess');
           setCookie('token',data.token,1);
-          $(location).attr('href','?page=user');
-          console.log($(location));
+          $(location).attr('href','?page=eventManager');
         }
       },
       error: function(e){
@@ -35,7 +33,6 @@ $(function (){
     var email=prompt("Please enter your email");
 
     var newPassword = generatePassword(10);
-    console.log(newPassword);
     alert(newPassword);
 
     var postData =
@@ -53,7 +50,7 @@ $(function (){
         if (data.error)
         alert('error');
         else {
-          alert('sucess');
+          alert('Email with a new password sent');
         }
       },
       error: function(e){

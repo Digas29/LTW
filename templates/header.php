@@ -8,7 +8,11 @@
   <p>This is the header</p>
 </head>
 <body>
-  <div id="logout" style="display:none">
+  <div class="header" hidden>
+    <a href="?page=eventManager">| Home</a>
+    <a href="?page=createEvent"> | Create event | </a>
+    <a href="?page=user">My profile |</a>
+    <input type='text' name='search' placeholder='Search event' id='search'>
     <button id='logout'>Log out</button>
   </div>
-  <script src="js/logout.js"></script>
+  <script src="js/header.js"></script>

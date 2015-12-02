@@ -1,6 +1,6 @@
 $(function (){
   $("#create").on('click' , function(){
-    var idUser=2; // CORRIGIR
+    var idUser=$('.header').data("id");
     var title=$('#title').val();
     var eventDate=$('#eventDate').val() + " " + $('#eventTime').val();
     var description=$('#description').val();
@@ -20,6 +20,7 @@ $(function (){
       "eventType":eventType,
       "isPublic":isPublic
     }
+
     $.ajax({
       type: "POST",
       url: "api/event/insertEvent.php",

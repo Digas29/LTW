@@ -1,6 +1,6 @@
 $(function (){
   $("#deleteUser").on('click' , function(){
-    var id=1; // CORRIGIR --------------------------------------------------------------------------------------
+    var id=$('.userInformation').data("id");
     var postData =
     {
       "id":id
@@ -17,9 +17,9 @@ $(function (){
         else {
           $.get( "api/user/logout.php", function( data ) {
             if (data.error)
-            alert('error');
+              alert('error');
             else{
-              alert('sucess');
+              alert('User deleted');
               document.cookie="token='null'";
               location="?page=authetication";
             }
@@ -32,50 +32,10 @@ $(function (){
     });
   });
 
-  $("#upload").on('click' , function(){
-    alert("Sucess");
-  });
-
-  $("#changePassword").on('click' , function(){
-    if ($('#newPassword').val() == $('#confirmNewPassword').val()){
-
-      var id=1; // CORRIGIR --------------------------------------------------------------------------------------
-      var postData =
-      {
-        "id":id,
-        "email":$('#email').val(),
-        "password":$('#password').val(),
-        "newPassword":$('#newPassword').val(),
-      }
-      $.ajax({
-        type: "POST",
-        url: "api/user/changePassword.php",
-        contentType: "application/json",
-        data: JSON.stringify(postData),
-        dataType: "json",
-        success: function(data){
-          if (data.error)
-          alert('error');
-          else {
-            alert('sucess');
-            location.href="?page=user";
-          }
-        },
-        error: function(e){
-          console.log(e);
-        }
-      });
-    }
-    else{
-      alert("Diferent passwords");
-      location=location;
-    }
-  });
-
 
 
   $(document).ready(function(){
-    var id=1; // CORRIGIR --------------------------------------------------------------------------------------
+    var id=$('.userInformation').data("id");
     var postData =
     {
       "id":id
@@ -87,15 +47,21 @@ $(function (){
       data: JSON.stringify(postData),
       dataType: "json",
       success: function(data){
-        //validCookie();
         if (data.error)
-        alert('error');
+          alert('error');
         else {
-          var result = "<form><p>Name: <input type='text' id='name' value='"+ data.name + "' readonly/></p>"
+          if (id == $('.header').data("id"))
+            $('.userAdmin').removeAttr('hidden');
+          var result = "";
+          var urlSmall = "images/users/thumbs_small/" + id +".jpg";
+          var urlOriginal = "images/users/originals/" + id +".jpg";
+          result = "<form><p><a id='imageLink' href='" + urlOriginal + "'><img id='image' src='" + urlSmall + "' alt='User image' height='200' width='200'></a></p>"
+          + "<p>Name: <input type='text' id='name' value='"+ data.name + "' readonly/></p>"
           + "<p>Birthdate: <input type='date' id='birthdate' value='"+ data.birthdate + "' readonly/></p>"
           + "<p>Email: <input type='email' id='email' value='"+ data.email + "' readonly/></p></form>"
           + "<button id='ok' hidden>Ok</button><button id='cancel' hidden>Cancel</button>";
           $(".userInformation").append(result);
+          checkSrcImage(id);
         }
 
       },
@@ -111,7 +77,7 @@ $(function (){
     $(':input').removeAttr('readonly');
     $(':button').removeAttr('hidden');
     $("#ok").on('click' , function(){
-      var id = 1;
+      var id = $('.userInformation').data("id");
       var postData =
       {
         "id":id,
@@ -127,9 +93,8 @@ $(function (){
         dataType: "json",
         success: function(data){
           if (data.error)
-          alert('error');
+            alert('error');
           else {
-            alert('sucess');
             location=location;
           }
 
@@ -144,4 +109,20 @@ $(function (){
     });
   });
 
+  $("#changePasswordButton").on('click' , function(){
+    $(location).attr('href','?page=changePassword');
+  });
 });
+
+function checkSrcImage(id){
+  var url = "images/users/thumbs_small/" + id +".jpg";
+  $.ajax({
+    url:url,
+    type:'HEAD',
+    error: function(){
+      var urlAlt = "images/users/thumbs_small/" + 0 +".jpg";
+      $('#image').attr('src', urlAlt);
+      $('#imageLink').removeAttr('href');
+    }
+  });
+}

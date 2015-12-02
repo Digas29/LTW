@@ -43,21 +43,7 @@ function checkCookie(fn) {
 
 $(document).ready(function() {
     checkCookie(function (loggedin) {
-      if (loggedin == true)
-        $("#logout").hide();
-      else {
-        $("#logout").show();
-      }
-    })
-});
-
-
-/*function validCookie() {
-  checkCookie(function (loggedin) {
-    if (loggedin == true)
-      $("#logout").hide();
-    else {
-      $("#logout").show();
-    }
-  })
-}*/
+      if (loggedin != true)
+        $('.header').removeAttr('hidden');
+    });
+  });

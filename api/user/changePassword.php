@@ -6,7 +6,8 @@ include_once 'user.php';
 $body = file_get_contents('php://input');
 if(isset($body)){
 	$json = json_decode($body);
-	$result = userAcess($json->email, $json->password);
+	$res = getUserById($json->id);
+	$result = userAcess($res['email'], $json->password);
 	if(isset($result)&&!empty($result)){
 		changePassword($json->id, $json->newPassword);
     $message = array('sucess' => 'Password sucefully changed');

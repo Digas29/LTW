@@ -14,6 +14,7 @@
               <th>Date</th>
               <th>Type</th>
               <th>Privacity</th>
+              <th></th>
             </tr>
           </table>
         </div>
@@ -25,6 +26,7 @@
               <th>Owner</th>
               <th>Date</th>
               <th>Type</th>
+              <th></th>
             </tr>
           </table>
         </div>
@@ -36,6 +38,7 @@
               <th>Owner</th>
               <th>Date</th>
               <th>Type</th>
+              <th></th>
             </tr>
           </table>
         </div>
@@ -48,6 +51,7 @@
               <th>Date</th>
               <th>Type</th>
               <th>Privacity</th>
+              <th></th>
             </tr>
           </table>
         </div>

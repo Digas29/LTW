@@ -7,18 +7,18 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="eventInformation" data-id="1">
-  <p><b>Event info:</b></p>
+<div class="adminOptions" hidden>
+  <p><b>Admin options</b></p>
   <button id='deleteEvent'>Delete</button>
-<!--
-  session_start();
-  if($_SESSION['id'] )
-  <button id='deleteEvent'>Delete</button>
--->
+  <button id='updateEvent'>Update</button>
+</div>
+
+<div class="eventInformation" data-id="<?=$_GET['id']?>">
+  <p><b>Event info</b></p>
 </div>
 
 <div class="invitedUsers">
-  <p><b>People invited:</b></p>
+  <p><b>People invited</b></p>
   <button id='inviteUser'>Invite user</button>
 </div>
 

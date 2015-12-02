@@ -96,4 +96,19 @@
 			return $e->getMessage();
 		}
 	}
+
+
+	function searchEvents($input){
+		global $db;
+		$var = '%' . $input . '%';
+		$stmt = $db->prepare("SELECT DISTINCT Event.title, Event.eventDate, Event.description, Event.eventType, Event.isPublic FROM Event, User WHERE ((Event.idUser = User.id AND User.name LIKE :input) OR Event.title LIKE :input OR Event.description LIKE :input OR Event.eventType LIKE :input) AND Event.isPublic = 1");
+		$stmt->bindParam(':input', $var, PDO::PARAM_STR);
+		try {
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $result;
+		} catch (PDOException $e) {
+			return $e->getMessage();
+		}
+	}
 ?>
