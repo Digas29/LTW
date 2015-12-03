@@ -1,17 +1,32 @@
-jQuery(document).ready(function() {
-  jQuery('.tabs .tab-links a').on('click', function(e)  {
-    var currentAttrValue = jQuery(this).attr('href');
+$(function (){
+  $(document).ready(function(){
+    $('.tabs .tab-links a').on('click', function(e)  {
+      var currentAttrValue = $(this).attr('href');
 
-    // Show/Hide Tabs
-    jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+      // Show/Hide Tabs
+      $('.tabs ' + currentAttrValue).show().siblings().hide();
 
-    // Change/remove current tab to active
-    jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+      // Change/remove current tab to active
+      $(this).parent('li').addClass('active').siblings().removeClass('active');
 
-    e.preventDefault();
+      e.preventDefault();
+    });
+    var postData = {};
+    $.ajax({
+      type: "POST",
+      url: "api/loginInfo.php",
+      contentType: "application/json",
+      data: JSON.stringify(postData),
+      dataType: "json",
+      success: function(data){
+        $('.header').attr('data-id', data.id);
+        loadEvents();
+      }
+    });
   });
+});
 
-
+function loadEvents(){
   var id= $('.header').data("id");
   var postData =
   {
@@ -25,7 +40,7 @@ jQuery(document).ready(function() {
     dataType: "json",
     success: function(data){
       if (data.error)
-      alert('error');
+        alert('error');
       else {
         var result = "";
         for(var i = 0; i < data.length; i++){
@@ -33,9 +48,9 @@ jQuery(document).ready(function() {
           "<td>" + data[i].eventDate + "</td>"+
           "<td>" + data[i].eventType + "</td>";
           if (data[i].isPublic == 1)
-            result += "<td> Public </td>";
+          result += "<td> Public </td>";
           else
-            result += "<td> Private </td>";
+          result += "<td> Private </td>";
           result += "<td><a href='?page=event&id=" + data[i].id + "'>See more</a></td></tr>";
         }
         $("#myEventsTable").append(result);
@@ -60,7 +75,7 @@ jQuery(document).ready(function() {
     dataType: "json",
     success: function(data){
       if (data.error)
-      alert('error');
+        alert('error');
       else {
         var result = "";
         for(var i = 0; i < data.length; i++){
@@ -91,7 +106,7 @@ jQuery(document).ready(function() {
     dataType: "json",
     success: function(data){
       if (data.error)
-      alert('error');
+        alert('error');
       else {
         var result = "";
         for(var i = 0; i < data.length; i++){
@@ -121,7 +136,7 @@ jQuery(document).ready(function() {
     dataType: "json",
     success: function(data){
       if (data.error)
-      alert('error');
+        alert('error');
       else {
         var result = "";
         for(var i = 0; i < data.length; i++){
@@ -130,9 +145,9 @@ jQuery(document).ready(function() {
           "<td>" + data[i].eventDate + "</td>"+
           "<td>" + data[i].eventType + "</td>";
           if (data[i].isPublic == 1)
-            result += "<td> Public </td>";
+          result += "<td> Public </td>";
           else
-            result += "<td> Private </td>";
+          result += "<td> Private </td>";
           result += "<td><a href='?page=event&id=" + data[i].id + "'>See more</a></td></tr>";
         }
         $("#allEventsTable").append(result);
@@ -142,4 +157,5 @@ jQuery(document).ready(function() {
       console.log(e);
     }
   });
-});
+
+}
