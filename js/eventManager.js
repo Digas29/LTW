@@ -1,30 +1,33 @@
-$(function (){
-  $(document).ready(function(){
-    $('.tabs .tab-links a').on('click', function(e)  {
-      var currentAttrValue = $(this).attr('href');
-
-      // Show/Hide Tabs
-      $('.tabs ' + currentAttrValue).show().siblings().hide();
-
-      // Change/remove current tab to active
-      $(this).parent('li').addClass('active').siblings().removeClass('active');
-
-      e.preventDefault();
-    });
-    var postData = {};
-    $.ajax({
-      type: "POST",
-      url: "api/loginInfo.php",
-      contentType: "application/json",
-      data: JSON.stringify(postData),
-      dataType: "json",
-      success: function(data){
-        $('.header').attr('data-id', data.id);
-        loadEvents();
-      }
-    });
+$(document).ready(function(){
+  var postData = {};
+  $.ajax({
+    type: "POST",
+    url: "api/loginInfo.php",
+    contentType: "application/json",
+    data: JSON.stringify(postData),
+    dataType: "json",
+    success: function(data){
+      $('.header').attr('data-id', data.id);
+      $('a[href^="?page=user"]').attr('href', "?page=user&id=" + data.id);
+      loadEvents();
+      changeTabs();
+    }
   });
 });
+
+function changeTabs(){
+  $('.tabs .tab-links a').on('click', function(e)  {
+    var currentAttrValue = $(this).attr('href');
+
+    // Show/Hide Tabs
+    $('.tabs ' + currentAttrValue).show().siblings().hide();
+
+    // Change/remove current tab to active
+    $(this).parent('li').addClass('active').siblings().removeClass('active');
+
+    e.preventDefault();
+  });
+}
 
 function loadEvents(){
   var id= $('.header').data("id");
@@ -40,7 +43,7 @@ function loadEvents(){
     dataType: "json",
     success: function(data){
       if (data.error)
-        alert('error');
+      alert('error');
       else {
         var result = "";
         for(var i = 0; i < data.length; i++){
@@ -75,7 +78,7 @@ function loadEvents(){
     dataType: "json",
     success: function(data){
       if (data.error)
-        alert('error');
+      alert('error');
       else {
         var result = "";
         for(var i = 0; i < data.length; i++){
@@ -106,7 +109,7 @@ function loadEvents(){
     dataType: "json",
     success: function(data){
       if (data.error)
-        alert('error');
+      alert('error');
       else {
         var result = "";
         for(var i = 0; i < data.length; i++){
@@ -136,7 +139,7 @@ function loadEvents(){
     dataType: "json",
     success: function(data){
       if (data.error)
-        alert('error');
+      alert('error');
       else {
         var result = "";
         for(var i = 0; i < data.length; i++){
@@ -157,5 +160,4 @@ function loadEvents(){
       console.log(e);
     }
   });
-
 }

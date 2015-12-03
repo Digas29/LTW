@@ -19,7 +19,7 @@
 
 <div class="invitedUsers">
   <p><b>People invited</b></p>
-  <button id='inviteUser'>Invite user</button>
+  <button id='inviteUser' hidden>Invite user</button>
 </div>
 
 

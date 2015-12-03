@@ -28,7 +28,6 @@ $(function (){
           location=location;
         }
         else {
-          alert('sucess');
           $(location).attr('href','index.php?page=authentication');
         }
       },
@@ -36,5 +35,9 @@ $(function (){
         console.log(e);
       }
     });
+  });
+
+  $("#cancel").on('click' , function(){
+    $(location).attr('href','index.php?page=authentication');
   });
 });

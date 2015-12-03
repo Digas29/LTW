@@ -40,7 +40,7 @@
 
 	function getCommentbyEventId($idEvent){
 		global $db;
-		$stmt = $db->prepare('SELECT Comment.id, User.name, Comment.description, Comment.commentDate FROM Comment, User WHERE User.id = Comment.idUser AND Comment.idEvent = :idEvent');
+		$stmt = $db->prepare('SELECT Comment.id, User.name, User.id AS idUser, Comment.description, Comment.commentDate FROM Comment, User WHERE User.id = Comment.idUser AND Comment.idEvent = :idEvent');
 		$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 		try {
 			$stmt->execute();

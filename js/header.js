@@ -1,5 +1,4 @@
 $(function (){
-
   $("#logout").on('click' , function(){
     $.get( "api/user/logout.php", function( data ) {
       if (data.error)
@@ -37,20 +36,4 @@ $(function (){
       });
     }
   });
-
-  $(document).ready(function(){
-    var postData = {};
-    $.ajax({
-      type: "POST",
-      url: "api/loginInfo.php",
-      contentType: "application/json",
-      data: JSON.stringify(postData),
-      dataType: "json",
-      success: function(data){
-        $('.header').attr('data-id', data.id);
-        $('a[href^="?page=user"]').attr('href', "?page=user&id=" + data.id);
-      }
-    });
-  });
-
 });

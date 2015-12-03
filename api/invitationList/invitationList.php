@@ -26,7 +26,7 @@
 
 	function getInvitesByEventId($idEvent){
 		global $db;
-		$stmt = $db->prepare('SELECT User.name, User.email, InvitationList.id FROM User, InvitationList WHERE InvitationList.idEvent = :idEvent AND InvitationList.idUser = User.id');
+		$stmt = $db->prepare('SELECT User.name, User.email, User.id AS idUser, InvitationList.id FROM User, InvitationList WHERE InvitationList.idEvent = :idEvent AND InvitationList.idUser = User.id');
 		$stmt->bindParam(':idEvent', $idEvent, PDO::PARAM_INT);
 		try {
 			$stmt->execute();

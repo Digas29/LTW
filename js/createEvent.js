@@ -1,4 +1,20 @@
-$(function (){
+$(document).ready(function(){
+  var postData = {};
+  $.ajax({
+    type: "POST",
+    url: "api/loginInfo.php",
+    contentType: "application/json",
+    data: JSON.stringify(postData),
+    dataType: "json",
+    success: function(data){
+      $('.header').attr('data-id', data.id);
+      $('a[href^="?page=user"]').attr('href', "?page=user&id=" + data.id);
+      createEvent();
+    }
+  });
+});
+
+function createEvent(){
   $("#create").on('click' , function(){
     var idUser=$('.header').data("id");
     var title=$('#title').val();
@@ -7,9 +23,9 @@ $(function (){
     var eventType=$('#eventType').val();
     var isPublic;
     if ($('#isPublic')[0].checked)
-      isPublic = 1;
+    isPublic = 1;
     else
-      isPublic = 0;
+    isPublic = 0;
 
     var postData =
     {
@@ -29,7 +45,7 @@ $(function (){
       dataType: "json",
       success: function(data){
         if (data.error)
-          alert('error');
+        alert('error');
         else {
           alert('sucess');
         }
@@ -39,4 +55,4 @@ $(function (){
       }
     });
   });
-});
+}
