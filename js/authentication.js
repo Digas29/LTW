@@ -18,7 +18,7 @@ $(function (){
         alert('error');
         else {
           setCookie('token',data.token,1);
-          $(location).attr('href','?page=eventManager');
+          location.href = "?page=eventManager";
         }
       },
       error: function(e){

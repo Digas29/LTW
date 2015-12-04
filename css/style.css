@@ -1,0 +1,165 @@
+/* _____________________________________________________________________HEADER_________________________________________________________________________________*/
+
+/*#MFY {
+	color:blue;
+	font-size:3em;
+	font-weight: bold;
+	font-style: italic;
+}*/
+
+/* _____________________________________________________________________Authentication_________________________________________________________________________________*/
+
+* { box-sizing: border-box }
+
+*:focus {
+	outline: none;
+}
+
+body {
+font-family: Arial;
+background-color: #3498DB;
+padding: 50px;
+}
+
+.login {
+margin: 20px auto;
+width: 300px;
+}
+
+.login-screen {
+background-color: #FFF;
+padding: 20px;
+border-radius: 5px
+}
+
+.app-title {
+text-align: center;
+color: #777;
+}
+
+.login-form {
+text-align: center;
+}
+
+.control-group {
+margin-bottom: 10px;
+}
+
+input {
+text-align: center;
+background-color: #ECF0F1;
+border: 2px solid transparent;
+border-radius: 3px;
+font-size: 16px;
+font-weight: 200;
+padding: 10px 0;
+width: 250px;
+transition: border .5s;
+}
+
+input:focus {
+border: 2px solid #3498DB;
+box-shadow: none;
+}
+
+#submit {
+  border: 2px solid transparent;
+  background: #3498DB;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+#submit:hover {
+  background-color: #2980B9;
+}
+
+#link-registation #passwordRecuperation {
+  font-size: 12px;
+  color: #444;
+  display: block;
+	margin-top: 12px;
+}
+
+header{
+  height:50px;
+}
+
+footer{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:100px;
+	right: 0px;
+}
+
+header{ text-align:center; color:#FFF; font:bold 1.2em/2.5 arial;  font-size: 30px;}
+footer{ text-align:center; color:#FFF; font:bold 1.2em/2.5 arial; }
+
+/* _____________________________________________________________________Event Manager_________________________________________________________________________________*/
+
+/*----- Tabs -----*/
+.tabs {
+  width:100%;
+  display:inline-block;
+}
+
+/*----- Tab Links -----*/
+/* Clearfix */
+.tab-links:after {
+  display:block;
+  clear:both;
+  content:'';
+}
+
+.tab-links li {
+  margin:0px 5px;
+  float:left;
+  list-style:none;
+}
+
+.tab-links a {
+  padding:9px 15px;
+  display:inline-block;
+  border-radius:3px 3px 0px 0px;
+  background:#7FB5DA;
+  font-size:16px;
+  font-weight:600;
+  color:#4c4c4c;
+  transition:all linear 0.15s;
+}
+
+.tab-links a:hover {
+  background:#a7cce5;
+  text-decoration:none;
+}
+
+li.active a, li.active a:hover {
+  background:#fff;
+  color:#4c4c4c;
+}
+
+/*----- Content of Tabs -----*/
+.tab-content {
+  padding:15px;
+  border-radius:3px;
+  box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+  background:#fff;
+}
+
+.tab {
+  display:none;
+}
+
+.tab.active {
+  display:block;
+}
