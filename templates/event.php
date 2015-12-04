@@ -17,9 +17,30 @@
   <p><b>Event info</b></p>
 </div>
 
+<div class="eventPhotos">
+  <p><b>Event photos</b></p>
+  <section id="images"></section>
+  <p><form action="api/event/upload.php" method="post" enctype="multipart/form-data">
+    <label>Title:
+      <input type="text" name="title">
+    </label>
+    <input  type="number" value="<?=$_GET['id']?>" name="id" hidden>
+    <input type="file" name="image">
+    <input id="upload" type="submit" value="Upload">
+  </form></p>
+</div>
+
 <div class="invitedUsers">
   <p><b>People invited</b></p>
   <button id='inviteUser' hidden>Invite user</button>
+  <table id="inviteTable">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </table>
 </div>
 
 
@@ -37,8 +58,8 @@
 
 
   <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site http://www.website.com."
-   title="Share by Email">
+  title="Share by Email">
   <img src="http://png-2.findicons.com/files/icons/573/must_have/48/mail.png">
-  </a>
+</a>
 </div>
 <script src="js/event.js"></script>

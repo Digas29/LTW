@@ -8,7 +8,18 @@
 
     <div class="tab-content">
         <div id="myEvents" class="tab active">
-          <table id="myEventsTable">
+          <h3>Past events</h3>
+          <table id="myEventsTablePast">
+            <tr>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Privacity</th>
+              <th></th>
+            </tr>
+          </table>
+          <h3>Future events</h3>
+          <table id="myEventsTableFuture">
             <tr>
               <th>Title</th>
               <th>Date</th>
@@ -20,7 +31,18 @@
         </div>
 
         <div id="public" class="tab">
-          <table id="publicEventsTable">
+          <h3>Past events</h3>
+          <table id="publicEventsTablePast">
+            <tr>
+              <th>Title</th>
+              <th>Owner</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th></th>
+            </tr>
+          </table>
+          <h3>Future events</h3>
+          <table id="publicEventsTableFuture">
             <tr>
               <th>Title</th>
               <th>Owner</th>
@@ -32,7 +54,18 @@
         </div>
 
         <div id="private" class="tab">
-          <table id="privateEventsTable">
+          <h3>Past events</h3>
+          <table id="privateEventsTablePast">
+            <tr>
+              <th>Title</th>
+              <th>Owner</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th></th>
+            </tr>
+          </table>
+          <h3>Future events</h3>
+          <table id="privateEventsTableFuture">
             <tr>
               <th>Title</th>
               <th>Owner</th>
@@ -44,7 +77,19 @@
         </div>
 
         <div id="all" class="tab">
-          <table id="allEventsTable">
+          <h3>Past events</h3>
+          <table id="allEventsTablePast">
+            <tr>
+              <th>Title</th>
+              <th>Owner</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Privacity</th>
+              <th></th>
+            </tr>
+          </table>
+          <h3>Future events</h3>
+          <table id="allEventsTableFuture">
             <tr>
               <th>Title</th>
               <th>Owner</th>
@@ -56,5 +101,5 @@
           </table>
         </div>
     </div>
+    <script src="js/eventManager.js"></script>
 </div>
-<script src="js/eventManager.js"></script>

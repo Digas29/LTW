@@ -4,7 +4,8 @@
   $body = file_get_contents('php://input');
   if(isset($body)){
     $json = json_decode($body);
-    $message = searchEvents($json->input, $json->id);
+    deletePhoto($json->id, $json->name);
+    $message = array('sucess' => 'photo has been deleted');
   } else {
     $message = array('error' => 'Unexpected exit');
   }

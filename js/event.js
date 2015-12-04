@@ -11,11 +11,8 @@ $(document).ready(function(){
       $('a[href^="?page=user"]').attr('href', "?page=user&id=" + data.id);
       getEventInfo();
       insertComment();
-
-      inviteUser();
-
       if ($('.eventInformation').data("owner") == $('.header').data("id")){
-        updateEvent()
+        updateEvent();
         deleteEvent();
       }
     }
@@ -92,12 +89,12 @@ function inviteUser(){
   });
 }
 
-
 function getEventInfo(){
   var id=$('.eventInformation').data("id");
   var postData =
   {
-    "id":id
+    "id":id,
+    "idUser":$('.header').data("id")
   }
   $.ajax({
     type: "POST",
@@ -107,7 +104,7 @@ function getEventInfo(){
     dataType: "json",
     success: function(data){
       if (data.error)
-      alert('error');
+        history.back();
       else {
         var res = data.eventDate.split(" ");
         var eventDate = res[0];
@@ -129,10 +126,49 @@ function getEventInfo(){
         result += "<button id='ok' hidden>Ok</button><button id='cancel' hidden>Cancel</button>";
         $(".eventInformation").append(result);
         $('.eventInformation').attr('data-owner', data.id);
+        $('.eventInformation').attr('data-isPublic', data.isPublic);
         if($('.header').data("id") == data.id)
           $('.adminOptions').removeAttr('hidden');
-        if($('.header').data("id") == data.id || data.isPublic == 1)
+        if($('.header').data("id") == data.id || data.isPublic == 1){
           $('#inviteUser').removeAttr('hidden');
+          inviteUser();
+        }
+      }
+    },
+    error: function(e){
+      console.log(e);
+    }
+  });
+
+
+  $.ajax({
+    type: "POST",
+    url: "api/event/getEventPhotos.php",
+    contentType: "application/json",
+    data: JSON.stringify(postData),
+    dataType: "json",
+    success: function(data){
+      if (data.error)
+        alert('error');
+      else {
+        var index = 0;
+        var result = "";
+        var photos = data.photos.split(";");
+        var url = "";
+        var urlOriginal = "";
+        while (index<photos.length) {
+          url = "images/events/thumbs_small/" + photos[index] +".jpg";
+          urlOriginal = "images/events/originals/" + photos[index] +".jpg";
+          result += "<img href='" + urlOriginal + "' src='" + url + "' alt='Event image' height='200' width='200'>";
+          if ($('.eventInformation').data("owner") == $('.header').data("id")){
+            result += "<button id='deletePhoto' data-name='" + photos[index] + "'>Delete</button>";
+          }
+          index++;
+        }
+        $("#images").append(result);
+        clickImage();
+        if ($('.eventInformation').data("owner") == $('.header').data("id"))
+          deletePhotoButton();
       }
     },
     error: function(e){
@@ -154,14 +190,15 @@ function getEventInfo(){
         var index = 0;
         var result = "";
         while (index<data.length) {
-          result += "<p>Name: " + data[index].name + " | "
-          + "Email: " + data[index].email + " | ";
+          result += "<tr><td>" + data[index].name + "</td><td>" + data[index].email + "</td>";
           if ($('.eventInformation').data("owner") == $('.header').data("id") || data[index].idUser == $('.header').data("id"))
-            result += "<button class='deleteInviteButton' data-id='" + data[index].id + "'>Delete</button>";
-          result += "</p>";
+            result += "<td><button class='deleteInviteButton' data-id='" + data[index].id + "'>Delete</button></td>";
+          else
+            result += "<td></td>";
+          result += "<td>" + "<a href='?page=user&id=" + data[index].idUser + "'>See more</a>" + "</td></tr>";
           index++;
         }
-        $(".invitedUsers").append(result);
+        $("#inviteTable").append(result);
         deleteInviteButton();
       }
     },
@@ -378,5 +415,51 @@ function updateComment(){
         location=location;
       });
     }
+  });
+}
+
+function clickImage(){
+  $( "img" ).click(function() {
+    showImage($(this).attr('href'));
+    returnButton();
+  });
+}
+
+function showImage(url){
+  var result = "<body><div class='image'>";
+  result += "<p><img id='image' src='" + url + "' alt='User image'></p><p><button id='return'>Return</button></p></div></body>";
+  $('div:not(.header)').remove();
+  $(result).insertAfter( ".header" );
+}
+
+function returnButton(){
+  $("#return").on('click' , function(){
+    location=location;
+  });
+}
+
+function deletePhotoButton(){
+  $("#deletePhoto").on('click' , function(){
+    var postData = {
+      "id":$('.eventInformation').data("id"),
+      "name":$(this).data('name')
+    }
+    $.ajax({
+      type: "POST",
+      url: "api/event/deletePhoto.php",
+      contentType: "application/json",
+      data: JSON.stringify(postData),
+      dataType: "json",
+      success: function(data){
+        if (data.error)
+          alert('error');
+        else {
+          location=location;
+        }
+      },
+      error: function(e){
+        console.log(e);
+      }
+    });
   });
 }

@@ -45,9 +45,9 @@ function createEvent(){
       dataType: "json",
       success: function(data){
         if (data.error)
-        alert('error');
+          alert('error');
         else {
-          alert('sucess');
+          location.href = "?page=eventManager";
         }
       },
       error: function(e){

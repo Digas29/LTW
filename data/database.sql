@@ -14,6 +14,7 @@ CREATE TABLE User (
 	name				NVARCHAR2 (64) NOT NULL,
 	birthdate		TEXT NOT NULL,
 	email				NVARCHAR2 (64) NOT NULL,
+	havePhoto		BOOLEAN NOT NULL CHECK (havePhoto IN (0,1)),
 	password		NVARCHAR2 (64) NOT NULL
 );
 
@@ -24,7 +25,8 @@ CREATE TABLE Event (
 	eventDate			TEXT NOT NULL,
 	description		TEXT NOT NULL,
 	eventType			NVARCHAR2 (64) NOT NULL,
-	isPublic			BOOLEAN NOT NULL CHECK (isPublic IN (0,1))
+	isPublic			BOOLEAN NOT NULL CHECK (isPublic IN (0,1)),
+	photos				TEXT
 );
 
 CREATE TABLE InvitationList (
@@ -43,10 +45,10 @@ CREATE TABLE Comment (
 );
 
 --$result = md5($salt.$string); var result = md5(salt+string); SALT + MD5 (salt before)
-INSERT INTO User(name, birthdate, email, password) VALUES('Rui', '1994-12-01', 'rui@gmail.com', '8a5b4ac36aba7445422abac5ac44667da36df6bcb3b8106821612c74c5764c14');
-INSERT INTO User(name, birthdate, email, password) VALUES('Antonio', '1995-05-11', 'antonio@gmail.com', '4ee3679892e6ac5a5b513eba7fd529d363d7a96508421c5dbd44b01b349cf514');
+INSERT INTO User(name, birthdate, email, havePhoto, password) VALUES('Rui', '1994-12-01', 'rui@gmail.com', 1, '8a5b4ac36aba7445422abac5ac44667da36df6bcb3b8106821612c74c5764c14');
+INSERT INTO User(name, birthdate, email, havePhoto, password) VALUES('Antonio', '1995-05-11', 'antonio@gmail.com', 0, '4ee3679892e6ac5a5b513eba7fd529d363d7a96508421c5dbd44b01b349cf514');
 
-INSERT INTO Event(idUser, title, eventDate, description, eventType, isPublic) VALUES(1, 'Rui Veloso no coliseu', '2015-12-11 23:00', 'Uma cena monstuosa', 'Concerto', 1);
+INSERT INTO Event(idUser, title, eventDate, description, eventType, isPublic, photos) VALUES(1, 'Rui Veloso no coliseu', '2015-12-11 23:00', 'Uma cena monstuosa', 'Concerto', 1, "");
 
 INSERT INTO InvitationList(idEvent, idUser) VALUES(1, 1);
 INSERT INTO InvitationList(idEvent, idUser) VALUES(1, 2);

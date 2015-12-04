@@ -75,16 +75,19 @@ function getUserInfo(){
       else {
         if (id == $('.header').data("id"))
         $('.userAdmin').removeAttr('hidden');
+        var idPhoto = 0;
+        if (data.havePhoto == 1)
+          idPhoto = id;
+        var url = "images/users/thumbs_small/" + idPhoto +".jpg";
+        var urlOriginal = "images/users/originals/" + idPhoto +".jpg";
         var result = "";
-        var urlSmall = "images/users/thumbs_small/" + id +".jpg";
-        var urlOriginal = "images/users/originals/" + id +".jpg";
-        result = "<form><p><a id='imageLink' href='" + urlOriginal + "'><img id='image' src='" + urlSmall + "' alt='User image' height='200' width='200'></a></p>"
+        result = "<form><p><img href='" + urlOriginal + "' src='" + url + "' alt='User image' height='200' width='200'></p>"
         + "<p>Name: <input type='text' id='name' value='"+ data.name + "' readonly/></p>"
         + "<p>Birthdate: <input type='date' id='birthdate' value='"+ data.birthdate + "' readonly/></p>"
         + "<p>Email: <input type='email' id='email' value='"+ data.email + "' readonly/></p></form>"
         + "<button id='ok' hidden>Ok</button><button id='cancel' hidden>Cancel</button>";
         $(".userInformation").append(result);
-        checkSrcImage(id);
+        clickImage();
       }
 
     },
@@ -139,15 +142,22 @@ function changePassword(){
   });
 }
 
-function checkSrcImage(id){
-  var url = "images/users/thumbs_small/" + id +".jpg";
-  $.ajax({
-    url:url,
-    type:'HEAD',
-    error: function(){
-      var urlAlt = "images/users/thumbs_small/" + 0 +".jpg";
-      $('#image').attr('src', urlAlt);
-      $('#imageLink').removeAttr('href');
-    }
+function clickImage(){
+  $( "img" ).click(function() {
+    showImage($(this).attr('href'));
+    returnButton();
+  });
+}
+
+function showImage(url){
+  var result = "<body><div class='image'>";
+  result += "<p><img id='image' src='" + url + "' alt='User image'></p><p><button id='return'>Return</button></p></div></body>";
+  $('div:not(.header)').remove();
+  $(result).insertAfter( ".header" );
+}
+
+function returnButton(){
+  $("#return").on('click' , function(){
+    location=location;
   });
 }

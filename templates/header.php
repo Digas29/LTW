@@ -14,5 +14,5 @@
     <a href="?page=user">My profile |</a>
     <input type='text' name='search' placeholder='Search event' id='search'>
     <button id='logout'>Log out</button>
+    <script src="js/header.js"></script>
   </div>
-  <script src="js/header.js"></script>
