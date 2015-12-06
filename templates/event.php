@@ -7,32 +7,32 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
+
+
+<div class="eventInformation" data-id="<?=$_GET['id']?>">
+</div>
+
+
+
+<div class="eventPhotos">
+  <section id="images"></section>
+  <p>
+    <form id="uploadForm" action="api/event/upload.php" method="post" enctype="multipart/form-data" hidden>
+      <label>Title: </label> <input id="title" type="text" name="title">
+      <input  type="number" value="<?=$_GET['id']?>" name="id" hidden>
+      <input type="file" name="image">
+      <input id="upload" type="submit" value="Upload">
+    </form>
+  </p>
+</div>
+
 <div class="adminOptions" hidden>
-  <p><b>Admin options</b></p>
   <button id='deleteEvent'>Delete</button>
   <button id='updateEvent'>Update</button>
 </div>
 
-<div class="eventInformation" data-id="<?=$_GET['id']?>">
-  <p><b>Event info</b></p>
-</div>
-
-<div class="eventPhotos">
-  <p><b>Event photos</b></p>
-  <section id="images"></section>
-  <p><form action="api/event/upload.php" method="post" enctype="multipart/form-data">
-    <label>Title:
-      <input type="text" name="title">
-    </label>
-    <input  type="number" value="<?=$_GET['id']?>" name="id" hidden>
-    <input type="file" name="image">
-    <input id="upload" type="submit" value="Upload">
-  </form></p>
-</div>
-
 <div class="invitedUsers">
-  <p><b>People invited</b></p>
-  <button id='inviteUser' hidden>Invite user</button>
+  <p>People invited</p>
   <table id="inviteTable">
     <tr>
       <th>Name</th>
@@ -41,25 +41,22 @@
       <th></th>
     </tr>
   </table>
+  <div class='button'><button id='inviteUser' hidden>Invite user</button> </div>
 </div>
 
 
 <div class="eventComments">
-  <p><b>Comments:</b></p>
+  <p>Comments</p>
   <div class="insertComment" data-userId="1">
     <input type='text' placeholder='Comment' id='comment'>
     <button id='submit'>Submit</button>
   </div>
 </div>
 
-<div class="fb-share-button" data-href="http://google.com" data-layout="button_count"></div>
-
 <div class="share">
-
-
-  <a href="mailto:?subject=I wanted you to see this site&amp;body=Check out this site http://www.website.com."
-  title="Share by Email">
-  <img src="http://png-2.findicons.com/files/icons/573/must_have/48/mail.png">
-</a>
+  <div class="fb-share-button" data-href="" data-layout="button_count"></div>
+  <button id="sendByMail" href="" title="Share by Email">
+    EMAIL
+  </button>
 </div>
 <script src="js/event.js"></script>

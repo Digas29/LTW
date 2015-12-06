@@ -1,13 +1,5 @@
 /* _____________________________________________________________________HEADER_________________________________________________________________________________*/
 
-/*#MFY {
-	color:blue;
-	font-size:3em;
-	font-weight: bold;
-	font-style: italic;
-}*/
-
-
 * { box-sizing: border-box }
 
 *:focus {
@@ -345,6 +337,20 @@ tr:nth-child(odd) td {
 .userAdmin button:hover{
 	cursor: pointer;
 }
+.image{
+	text-align: center;
+	margin: 0 auto;
+}
+.image button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.image button:hover{
+	cursor: pointer;
+}
 /* _____________________________________________________________________NEW PASSWORD_________________________________________________________________________________*/
 
 #authentication{
@@ -391,20 +397,185 @@ tr:nth-child(odd) td {
 #creatEvent button:hover{
 	cursor: pointer;
 }
-#creatEvent input {
+#creatEvent input:not([type=radio]){
 	border: none;
 	border-bottom: thin solid #ffffff;
 	background: transparent;
 	text-align: center;
 	color: #ffffff;
-	margin-bottom: 1.5rem;
+	margin-bottom: 2rem;
 	width: 20.0em;
-	font-size:16px;
+	font-size:18px;
 }
 
 #creatEvent label{
 	font-weight: bold;
   display: block;
   font-size: 20px;
-  transform: translateY(-8px);
+  transform: translateY(-10px);
+}
+/* _____________________________________________________________________SIGN UP_________________________________________________________________________________*/
+#registation{
+	text-align: center;
+	padding-top: 3rem;
+	color: #ffffff;
+}
+#registation button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+#registation button:hover{
+	cursor: pointer;
+}
+#registation input{
+	border: none;
+	border-bottom: thin solid #ffffff;
+	background: transparent;
+	text-align: center;
+	color: #ffffff;
+	margin-bottom: 2rem;
+	width: 20.0em;
+	font-size:18px;
+}
+
+#registation label{
+	font-weight: bold;
+  display: block;
+  font-size: 20px;
+  transform: translateY(-10px);
+}
+/* _____________________________________________________________________EVENT_________________________________________________________________________________*/
+.eventInformation{
+	padding-top: 3rem;
+	color: #ffffff;
+}
+.adminOptions{
+	text-align: center;
+	color: #ffffff;
+}
+.adminOptions button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.adminOptions button:hover{
+	cursor: pointer;
+}
+.eventInformation button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.eventInformation button:hover{
+	cursor: pointer;
+}
+.eventInformation input {
+	background: transparent;
+  border: none;
+	color: #ffffff;
+	font-size:18px;
+}
+.eventInformation #title{
+	font-weight: bold;
+	font-size:26px;
+}
+.eventInformation label{
+	font-weight: bold;
+  display: block;
+  font-size: 20px;
+  transform: translateY(-5px);
+}
+.eventPhotos button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.eventPhotos button:hover{
+	cursor: pointer;
+}
+.eventPhotos {
+	color: #ffffff;
+	padding-top: 1rem;
+}
+.eventPhotos #title{
+	background: transparent;
+	border-bottom: thin solid #ffffff;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	color: #ffffff;
+	font-size:18px;
+}
+.invitedUsers p {
+	color: #ffffff;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+.invitedUsers button{
+	text-align: left;
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.invitedUsers button:hover{
+	cursor: pointer;
+}
+.invitedUsers .button{
+	padding-top: 1rem;
+	text-align: center;
+}
+.eventComments p{
+	color: #ffffff;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.eventComments button{
+	text-align: left;
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.eventComments button:hover{
+	cursor: pointer;
+}
+.eventComments input {
+	background: transparent;
+	border-bottom: thin solid #ffffff;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	color: #ffffff;
+	font-size:18px;
+}
+.eventComments input::-webkit-input-placeholder {
+	color: #dfdfdf;
+}
+.share {
+	padding-top: 1rem;
+	text-align: center;
+}
+.share button{
+	text-align: left;
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.share button:hover{
+	cursor: pointer;
 }

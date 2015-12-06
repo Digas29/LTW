@@ -11,10 +11,6 @@ $(document).ready(function(){
       $('a[href^="?page=user"]').attr('href', "?page=user&id=" + data.id);
       getEventInfo();
       insertComment();
-      if ($('.eventInformation').data("owner") == $('.header').data("id")){
-        updateEvent();
-        deleteEvent();
-      }
     }
   });
 });
@@ -51,6 +47,11 @@ function insertComment(){
         console.log(e);
       }
     });
+  });
+  $("#comment").keypress(function(e){
+    if (e.keyCode == 13){
+      $('#submit').click();
+    }
   });
 }
 
@@ -109,12 +110,12 @@ function getEventInfo(){
         var res = data.eventDate.split(" ");
         var eventDate = res[0];
         var eventTime = res[1];
-        var result = "<form><p>Title: <input type='text' id='title' value='" + data.title + "' readonly/></p>"
-        + "<p>Owner: <input type='text' id='owner' value='" + data.name + "' readonly/></p>"
-        + "<p>Date: <input type='date' id='eventDate' value='" + eventDate + "' readonly/></p>"
-        + "<p>Hour: <input type='time' id='eventTime' value='" + eventTime + "' readonly/></p>"
-        + "<p>Description: <input type='text' id='description' value='" + data.description + "' readonly/></p>"
-        + "<p>Type: <input type='text' id='eventType' value='" + data.eventType + "' readonly/></p>";
+        var result = "<form><p><input type='text' id='title' value='" + data.title + "' readonly/></p>"
+        + "<p><label for='owner'>Owner</label><input type='text' id='owner' value='" + data.name + "' readonly/></p>"
+        + "<p><label for='eventDate'>Date</label><input type='date' id='eventDate' value='" + eventDate + "' readonly/></p>"
+        + "<p><label for='eventTime'>Hour</label><input type='time' id='eventTime' value='" + eventTime + "' readonly/></p>"
+        + "<p><label for='description'>Description</label><input type='text' id='description' value='" + data.description + "' readonly/></p>"
+        + "<p><label for='eventType'>Type</label><input type='text' id='eventType' value='" + data.eventType + "' readonly/></p>";
         if (data.isPublic == 1){
           result += "<p><input type='radio' value='Public' name='isPrivate' id='isPublic' checked='1'>Public"
           + "<input type='radio' value='Private' name='isPrivate' id='isPrivate' disabled>Private</p></form>";
@@ -123,12 +124,17 @@ function getEventInfo(){
           result += "<p><input type='radio' value='Public' name='isPrivate' id='isPublic' disabled>Public"
           + "<input type='radio' value='Private' name='isPrivate' id='isPrivate' checked='1'>Private</p></form>";
         }
-        result += "<button id='ok' hidden>Ok</button><button id='cancel' hidden>Cancel</button>";
+        result += "<button id='ok' hidden>Ok</button> <button id='cancel' hidden>Cancel</button>";
         $(".eventInformation").append(result);
+        $('.fb-share-button').attr('data-href', location.href);
+        sendByMail();
         $('.eventInformation').attr('data-owner', data.id);
         $('.eventInformation').attr('data-isPublic', data.isPublic);
-        if($('.header').data("id") == data.id)
+        if($('.header').data("id") == data.id){
           $('.adminOptions').removeAttr('hidden');
+          updateEvent();
+          deleteEvent();
+        }
         if($('.header').data("id") == data.id || data.isPublic == 1){
           $('#inviteUser').removeAttr('hidden');
           inviteUser();
@@ -156,12 +162,12 @@ function getEventInfo(){
         var photos = data.photos.split(";");
         var url = "";
         var urlOriginal = "";
-        while (index<photos.length) {
+        while (index < photos.length) {
           url = "images/events/thumbs_small/" + photos[index] +".jpg";
           urlOriginal = "images/events/originals/" + photos[index] +".jpg";
-          result += "<img href='" + urlOriginal + "' src='" + url + "' alt='Event image' height='200' width='200'>";
+          result += "<div class='eventImg'> <img href='" + urlOriginal + "' src='" + url + "' alt='Event image' height='200' width='200'> ";
           if ($('.eventInformation').data("owner") == $('.header').data("id")){
-            result += "<button id='deletePhoto' data-name='" + photos[index] + "'>Delete</button>";
+            result += "<br> <button id='deletePhoto' data-name='" + photos[index] + "' hidden>Delete</button></div>";
           }
           index++;
         }
@@ -272,6 +278,8 @@ function deleteEvent(){
 
 function updateEvent(){
   $("#updateEvent").on('click' , function(){
+    $(".eventInformation input").css("border-bottom", "thin solid #ffffff");
+    $("#uploadForm").show();
     $(':input:not(#owner)').removeAttr('readonly');
     $(':button').removeAttr('hidden');
     $('#isPublic').removeAttr('disabled');
@@ -461,5 +469,13 @@ function deletePhotoButton(){
         console.log(e);
       }
     });
+  });
+}
+
+function sendByMail(){
+  $("#sendByMail").on('click' , function(){
+    var email = prompt("Email to share this event:");
+    var ref = "mailto:" + email + "?subject=I wanted you to see this event&amp;body=Check out this event " +  location.href;
+    $('#sendByMail').attr('data-href', ref);
   });
 }

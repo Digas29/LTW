@@ -39,6 +39,6 @@ else {
   insertEventPhoto($id, $newPhotos);
 }
 
-$url = BASE_PATH . "index.php";
-header("Location: $url");
+  $url = '../../?page=event&id='. $id;
+  header("Refresh:0; url=$url");
 ?>

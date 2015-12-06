@@ -21,6 +21,6 @@
   imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
   imagejpeg($small, $smallFileName);
 
-  $url = BASE_PATH . "index.php";
-  header("Location: $url");
+  $url = '../../?page=user&id='. $id;
+  header("Refresh:0; url=$url");
 ?>
