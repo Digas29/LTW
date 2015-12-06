@@ -506,6 +506,9 @@ tr:nth-child(odd) td {
 	color: #ffffff;
 	padding-top: 1rem;
 }
+.images {
+	float: left;
+}
 .eventPhotos #title{
 	background: transparent;
 	border-bottom: thin solid #ffffff;

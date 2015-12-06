@@ -15,15 +15,13 @@
 
 
 <div class="eventPhotos">
-  <section id="images"></section>
-  <p>
-    <form id="uploadForm" action="api/event/upload.php" method="post" enctype="multipart/form-data" hidden>
-      <label>Title: </label> <input id="title" type="text" name="title">
-      <input  type="number" value="<?=$_GET['id']?>" name="id" hidden>
-      <input type="file" name="image">
-      <input id="upload" type="submit" value="Upload">
-    </form>
-  </p>
+  <div id="images"></div>
+  <form id="uploadForm" action="api/event/upload.php" method="post" enctype="multipart/form-data" hidden>
+    <label>Title: </label> <input id="title" type="text" name="title">
+    <input  type="number" value="<?=$_GET['id']?>" name="id" hidden>
+    <input type="file" name="image">
+    <input id="upload" type="submit" value="Upload">
+  </form>
 </div>
 
 <div class="adminOptions" hidden>

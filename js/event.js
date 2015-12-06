@@ -167,8 +167,9 @@ function getEventInfo(){
           urlOriginal = "images/events/originals/" + photos[index] +".jpg";
           result += "<div class='eventImg'> <img href='" + urlOriginal + "' src='" + url + "' alt='Event image' height='200' width='200'> ";
           if ($('.eventInformation').data("owner") == $('.header').data("id")){
-            result += "<br> <button id='deletePhoto' data-name='" + photos[index] + "' hidden>Delete</button></div>";
+            result += "<br> <button id='deletePhoto' data-name='" + photos[index] + "' hidden>Delete</button>";
           }
+          result += "</div>";
           index++;
         }
         $("#images").append(result);
