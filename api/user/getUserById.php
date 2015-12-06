@@ -5,6 +5,8 @@
   if(isset($body)){
     $json = json_decode($body);
     $message = getUserById($json->id);
+    if ($message == null)
+      $message = array('error' => 'Unexpected exit');
   } else {
   $message = array('error' => 'Unexpected exit');
   }

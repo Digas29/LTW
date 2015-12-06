@@ -71,7 +71,7 @@ function getUserInfo(){
     dataType: "json",
     success: function(data){
       if (data.error)
-      alert('error');
+        history.back();
       else {
         if (id == $('.header').data("id"))
         $('.userAdmin').removeAttr('hidden');

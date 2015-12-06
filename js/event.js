@@ -113,7 +113,7 @@ function getEventInfo(){
     dataType: "json",
     success: function(data){
       if (data.error)
-      history.back();
+        history.back();
       else {
         var res = data.eventDate.split(" ");
         var eventDate = res[0];

@@ -5,7 +5,7 @@ $(function (){
     var email=$('#email').val();
     var password=$('#password').val();
     var passwordConfirmation=$('#passwordConfirmation').val();
-    if (name == "" || birthdate == null || password "")
+    if (name == "" || birthdate == null || password == "")
       alert("Please complete all the fields");
     else if (password != passwordConfirmation) {
       alert('Password and confirmation are diferent');
