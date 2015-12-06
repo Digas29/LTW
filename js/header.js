@@ -13,29 +13,34 @@ $(function (){
 
   $('#search').keypress(function(e) {
     if (e.keyCode == 13) {
-      var postData =
-      {
-        "input":$(this).val(),
-        "id":$('.header').data("id")
-      }
-      $.ajax({
-        type: "POST",
-        url: "api/event/searchEvents.php",
-        contentType: "application/json",
-        data: JSON.stringify(postData),
-        dataType: "json",
-        success: function(data){
-          if (data.error)
-            alert('error');
-          else {
-            showResults(data);
-            returnButton();
-          }
-        },
-        error: function(e){
-          console.log(e);
+      var search = $(this).val();
+      if (search == "")
+      alert("Insert some text to search");
+      else {
+        var postData =
+        {
+          "input":search,
+          "id":$('.header').data("id")
         }
-      });
+        $.ajax({
+          type: "POST",
+          url: "api/event/searchEvents.php",
+          contentType: "application/json",
+          data: JSON.stringify(postData),
+          dataType: "json",
+          success: function(data){
+            if (data.error)
+            alert('error');
+            else {
+              showResults(data);
+              returnButton();
+            }
+          },
+          error: function(e){
+            console.log(e);
+          }
+        });
+      }
     }
   });
 });
@@ -60,14 +65,14 @@ function showResults(data){
       "<td>" + data[i].eventDate + "</td>"+
       "<td>" + data[i].eventType + "</td>";
       if (data[i].isPublic == 1)
-        result += "<td> Public </td>";
+      result += "<td> Public </td>";
       else
-        result += "<td> Private </td>";
+      result += "<td> Private </td>";
       result += "<td>" + "<a href='?page=event&id=" + data[i].id + "'>See more</a>" + "</td></tr>";
       if (data[i].eventDate < currentDate)
-        $("#resultsTablePast").append(result);
+      $("#resultsTablePast").append(result);
       else
-        $("#resultsTableFuture").append(result);
+      $("#resultsTableFuture").append(result);
     }
   }
 }

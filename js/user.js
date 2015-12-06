@@ -77,7 +77,7 @@ function getUserInfo(){
         $('.userAdmin').removeAttr('hidden');
         var idPhoto = 0;
         if (data.havePhoto == 1)
-          idPhoto = id;
+        idPhoto = id;
         var url = "images/users/thumbs_small/" + idPhoto +".jpg";
         var urlOriginal = "images/users/originals/" + idPhoto +".jpg";
         var result = "";
@@ -106,31 +106,43 @@ function updateUser(){
     $(':button').removeAttr('hidden');
     $("#ok").on('click' , function(){
       var id = $('.userInformation').data("id");
-      var postData =
-      {
-        "id":id,
-        "name":$('#name').val(),
-        "birthdate":$('#birthdate').val(),
-        "email":$('#email').val()
+      var name = $('#name').val();
+      var email = $('#email').val();
+      if (name == ""){
+        alert("Wrong name");
+        location=location;
       }
-      $.ajax({
-        type: "POST",
-        url: "api/user/updateUser.php",
-        contentType: "application/json",
-        data: JSON.stringify(postData),
-        dataType: "json",
-        success: function(data){
-          if (data.error)
-          alert('error');
-          else {
-            location=location;
-          }
-
-        },
-        error: function(e){
-          console.log(e);
+      if (is_email(email) == false){
+        alert("Wrong email");
+        location=location;
+      }
+      else {
+        var postData =
+        {
+          "id":id,
+          "name":name,
+          "birthdate":$('#birthdate').val(),
+          "email":email
         }
-      });
+        $.ajax({
+          type: "POST",
+          url: "api/user/updateUser.php",
+          contentType: "application/json",
+          data: JSON.stringify(postData),
+          dataType: "json",
+          success: function(data){
+            if (data.error)
+            alert('error');
+            else {
+              location=location;
+            }
+
+          },
+          error: function(e){
+            console.log(e);
+          }
+        });
+      }
     });
     $("#cancel").on('click' , function(){
       location=location;
@@ -162,4 +174,8 @@ function returnButton(){
   $("#return").on('click' , function(){
     location=location;
   });
+}
+
+function is_email(element) {
+  return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])/.test(element);
 }

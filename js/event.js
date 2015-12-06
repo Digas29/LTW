@@ -23,30 +23,35 @@ function insertComment(){
     var description=$('#comment').val();
     var date = new Date();
     var commentDate=date.getFullYear()+"-"+pad(date.getMonth()+1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes());
-    var postData =
-    {
-      "idEvent":idEvent,
-      "idUser":idUser,
-      "description":description,
-      "commentDate":commentDate
+    if (description == ""){
+      alert("Insert some text");
     }
-    $.ajax({
-      type: "POST",
-      url: "api/comment/insertComment.php",
-      contentType: "application/json",
-      data: JSON.stringify(postData),
-      dataType: "json",
-      success: function(data){
-        if (data.error)
-        alert('error');
-        else {
-          location=location;
-        }
-      },
-      error: function(e){
-        console.log(e);
+    else {
+      var postData =
+      {
+        "idEvent":idEvent,
+        "idUser":idUser,
+        "description":description,
+        "commentDate":commentDate
       }
-    });
+      $.ajax({
+        type: "POST",
+        url: "api/comment/insertComment.php",
+        contentType: "application/json",
+        data: JSON.stringify(postData),
+        dataType: "json",
+        success: function(data){
+          if (data.error)
+          alert('error');
+          else {
+            location=location;
+          }
+        },
+        error: function(e){
+          console.log(e);
+        }
+      });
+    }
   });
   $("#comment").keypress(function(e){
     if (e.keyCode == 13){
@@ -60,7 +65,7 @@ function insertComment(){
 function inviteUser(){
   $("#inviteUser").on('click' , function(){
     var email = prompt("Please guest email");
-    if (email != "" && email != null){
+    if (is_email(email) == true){
       var idEvent=$('.eventInformation').data("id");
       var postData =
       {
@@ -86,6 +91,9 @@ function inviteUser(){
       });
     }
     else if (email == "")
+    alert("Input a email");
+    else if (email == null){}
+    else
     alert("Input a valid email");
   });
 }
@@ -105,7 +113,7 @@ function getEventInfo(){
     dataType: "json",
     success: function(data){
       if (data.error)
-        history.back();
+      history.back();
       else {
         var res = data.eventDate.split(" ");
         var eventDate = res[0];
@@ -155,11 +163,13 @@ function getEventInfo(){
     dataType: "json",
     success: function(data){
       if (data.error)
-        alert('error');
+      alert('error');
       else {
         var index = 0;
         var result = "";
         var photos = data.photos.split(";");
+        if (photos.length == 1 && photos[0] == "")
+        photos = {};
         var url = "";
         var urlOriginal = "";
         while (index < photos.length) {
@@ -167,15 +177,16 @@ function getEventInfo(){
           urlOriginal = "images/events/originals/" + photos[index] +".jpg";
           result += "<div class='eventImg'> <img href='" + urlOriginal + "' src='" + url + "' alt='Event image' height='200' width='200'> ";
           if ($('.eventInformation').data("owner") == $('.header').data("id")){
-            result += "<br> <button id='deletePhoto' data-name='" + photos[index] + "' hidden>Delete</button>";
+            result += "<br> <button class='deletePhoto' data-name='" + photos[index] + "' hidden>Delete</button>";
           }
           result += "</div>";
           index++;
         }
-        $("#images").append(result);
+        $(".images").append(result);
         clickImage();
-        if ($('.eventInformation').data("owner") == $('.header').data("id"))
+        if ($('.eventInformation').data("owner") == $('.header').data("id")){
           deletePhotoButton();
+        }
       }
     },
     error: function(e){
@@ -199,9 +210,9 @@ function getEventInfo(){
         while (index<data.length) {
           result += "<tr><td>" + data[index].name + "</td><td>" + data[index].email + "</td>";
           if ($('.eventInformation').data("owner") == $('.header').data("id") || data[index].idUser == $('.header').data("id"))
-            result += "<td><button class='deleteInviteButton' data-id='" + data[index].id + "'>Delete</button></td>";
+          result += "<td><button class='deleteInviteButton' data-id='" + data[index].id + "'>Delete</button></td>";
           else
-            result += "<td></td>";
+          result += "<td></td>";
           result += "<td>" + "<a href='?page=user&id=" + data[index].idUser + "'>See more</a>" + "</td></tr>";
           index++;
         }
@@ -287,40 +298,49 @@ function updateEvent(){
     $('#isPrivate').removeAttr('disabled');
     $("#ok").on('click' , function(){
       var id = $('.eventInformation').data("id");
+      var title = $('#title').val();
       var eventDate = $('#eventDate').val() + " " + $('#eventTime').val();
+      var description = $('#description').val();
+      var type = $('#eventType').val();
       var isPublic = 0;
       if ($('#isPublic')[0].checked)
       isPublic = 1;
       else
       isPublic = 0;
-
-      var postData =
-      {
-        "id":id,
-        "title":$('#title').val(),
-        "eventDate":eventDate,
-        "description":$('#description').val(),
-        "eventType":$('#eventType').val(),
-        "isPublic":isPublic
+      if (title == "" || description == "" || type == ""){
+        alert("Wrong values");
+        location = location;
       }
-      $.ajax({
-        type: "POST",
-        url: "api/event/updateEvent.php",
-        contentType: "application/json",
-        data: JSON.stringify(postData),
-        dataType: "json",
-        success: function(data){
-          if (data.error)
-          alert('error');
-          else {
-            location=location;
-          }
+      else{
 
-        },
-        error: function(e){
-          console.log(e);
+        var postData =
+        {
+          "id":id,
+          "title":title,
+          "eventDate":eventDate,
+          "description":description,
+          "eventType":type,
+          "isPublic":isPublic
         }
-      });
+        $.ajax({
+          type: "POST",
+          url: "api/event/updateEvent.php",
+          contentType: "application/json",
+          data: JSON.stringify(postData),
+          dataType: "json",
+          success: function(data){
+            if (data.error)
+            alert('error');
+            else {
+              location=location;
+            }
+
+          },
+          error: function(e){
+            console.log(e);
+          }
+        });
+      }
     });
     $("#cancel").on('click' , function(){
       location=location;
@@ -448,7 +468,7 @@ function returnButton(){
 }
 
 function deletePhotoButton(){
-  $("#deletePhoto").on('click' , function(){
+  $(".deletePhoto").on('click' , function(){
     var postData = {
       "id":$('.eventInformation').data("id"),
       "name":$(this).data('name')
@@ -479,4 +499,8 @@ function sendByMail(){
     var ref = "mailto:" + email + "?subject=I wanted you to see this event&amp;body=Check out this event " +  location.href;
     $('#sendByMail').attr('data-href', ref);
   });
+}
+
+function is_email(element) {
+  return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])/.test(element);
 }

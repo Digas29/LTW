@@ -42,7 +42,7 @@ function changePassword(){
         dataType: "json",
         success: function(data){
           if (data.error)
-            alert('error');
+            alert('Incorrect password');
           else {
             alert('Password sucefully changed');
             location.href="?page=user&id=" + id;

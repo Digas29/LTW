@@ -506,9 +506,12 @@ tr:nth-child(odd) td {
 	color: #ffffff;
 	padding-top: 1rem;
 }
-.images {
-	float: left;
+
+.images div {
+	text-align: center;
+	display: inline-block;
 }
+
 .eventPhotos #title{
 	background: transparent;
 	border-bottom: thin solid #ffffff;
@@ -518,6 +521,7 @@ tr:nth-child(odd) td {
 	color: #ffffff;
 	font-size:18px;
 }
+
 .invitedUsers p {
 	color: #ffffff;
 	font-size: 20px;

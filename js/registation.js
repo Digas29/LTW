@@ -5,16 +5,21 @@ $(function (){
     var email=$('#email').val();
     var password=$('#password').val();
     var passwordConfirmation=$('#passwordConfirmation').val();
+    if (name == "" || birthdate == null || password "")
+      alert("Please complete all the fields");
+    else if (password != passwordConfirmation) {
+      alert('Password and confirmation are diferent');
+    }
+    else if (is_email(element) == false) {
+      alert('Wrong email format');
+    }
+    else {
     var postData =
     {
       "name":name,
       "birthdate":birthdate,
       "email":email,
       "password":password
-    }
-    if (password != passwordConfirmation){
-      alert('password and confirmation are diferent');
-      return;
     }
     $.ajax({
       type: "POST",
@@ -35,9 +40,14 @@ $(function (){
         console.log(e);
       }
     });
+  }
   });
 
   $("#cancel").on('click' , function(){
     $(location).attr('href','index.php?page=authentication');
   });
 });
+
+function is_email(element) {
+  return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])/.test(element);
+}

@@ -27,6 +27,15 @@ function createEvent(){
     else
     isPublic = 0;
 
+    var currentDate=date.getFullYear()+"-"+pad(date.getMonth()+1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes());
+    if (title == "" || description == "" || eventType == ""){
+      alert("Please complete all the fields");
+      location=location;
+    }
+    else if (eventDate == " " || eventDate < currentDate) {
+      alert("Incorrect date");
+    }
+
     var postData =
     {
       "idUser":idUser,
@@ -45,7 +54,7 @@ function createEvent(){
       dataType: "json",
       success: function(data){
         if (data.error)
-          alert('error');
+          alert('Error');
         else {
           location.href = "?page=eventManager";
         }
@@ -55,4 +64,8 @@ function createEvent(){
       }
     });
   });
+}
+
+function pad(d) {
+  return (d < 10) ? '0' + d.toString() : d.toString();
 }
