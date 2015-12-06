@@ -81,11 +81,10 @@ function getUserInfo(){
         var url = "images/users/thumbs_small/" + idPhoto +".jpg";
         var urlOriginal = "images/users/originals/" + idPhoto +".jpg";
         var result = "";
-        result = "<form><p><img href='" + urlOriginal + "' src='" + url + "' alt='User image' height='200' width='200'></p>"
-        + "<p>Name: <input type='text' id='name' value='"+ data.name + "' readonly/></p>"
-        + "<p>Birthdate: <input type='date' id='birthdate' value='"+ data.birthdate + "' readonly/></p>"
-        + "<p>Email: <input type='email' id='email' value='"+ data.email + "' readonly/></p></form>"
-        + "<button id='ok' hidden>Ok</button><button id='cancel' hidden>Cancel</button>";
+        result = "<form><p><input type='text' id='name' value='"+ data.name + "' readonly/></p>"
+        + "<p><img href='" + urlOriginal + "' src='" + url + "' alt='User image' height='200' width='200'></p>"
+        + "<p><label for='birthdate'>Birthdate</label><input type='date' id='birthdate' value='"+ data.birthdate + "' readonly/></p>"
+        + "<p><label for='email'>Email</label><input type='email' id='email' value='"+ data.email + "' readonly/></p></form>";
         $(".userInformation").append(result);
         clickImage();
       }
@@ -100,6 +99,9 @@ function getUserInfo(){
 
 function updateUser(){
   $("#updateUser").on('click' , function(){
+    $(".userInformation input").css("border-bottom", "thin solid #ffffff");
+    $("#file").show();
+    $("#upload").show();
     $(':input').removeAttr('readonly');
     $(':button').removeAttr('hidden');
     $("#ok").on('click' , function(){

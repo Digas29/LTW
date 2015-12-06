@@ -7,14 +7,19 @@
   <script src="js/cookies.js"></script>
 </head>
 <header>
-    <p>Meetings For You</p>
+    <p>Event Manager</p>
 </header>
 <body>
   <div class="header" hidden>
-    <a href="?page=eventManager">| Home</a>
-    <a href="?page=createEvent"> | Create event | </a>
-    <a href="?page=user">My profile |</a>
-    <input type='text' name='search' placeholder='Search event' id='search'>
-    <button id='logout'>Log out</button>
+    <ul>
+      <li> <a href="?page=eventManager">Home</a></li>
+      <li> <a href="?page=createEvent">Create event</a></li>
+      <li> <a href="?page=user">My profile</a> </li>
+      <li> <a href="#" id='logout'>Log out</a> </li>
+      <li class="container">
+        <input type='search' name='search' placeholder='Search event' id='search'>
+      </li>
+    </ul>
+
     <script src="js/header.js"></script>
   </div>

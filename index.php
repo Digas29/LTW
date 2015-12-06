@@ -15,6 +15,10 @@ foreach ($mandatoryLogin as $page) {
   }
 }
 
+if(isset($_SESSION['token']) && $currentPage == 'authentication'){
+  $currentPage = 'eventManager';
+}
+
 include 'templates/header.php';
 
 switch ($currentPage) {

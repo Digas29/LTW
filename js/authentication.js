@@ -26,6 +26,35 @@ $(function (){
       }
     });
   });
+  $("#password").keypress(function(e) {
+    if (e.keyCode == 13){
+      var email=$('#email').val();
+      var password=$('#password').val();
+      var postData =
+      {
+        "email":email,
+        "password":password
+      }
+      $.ajax({
+        type: "POST",
+        url: "api/user/login.php",
+        contentType: "application/json",
+        data: JSON.stringify(postData),
+        dataType: "json",
+        success: function(data){
+          if (data.error)
+          alert('error');
+          else {
+            setCookie('token',data.token,1);
+            location.href = "?page=eventManager";
+          }
+        },
+        error: function(e){
+          console.log(e);
+        }
+      });
+    }
+  });
 
 
 
