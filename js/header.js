@@ -15,7 +15,7 @@ $(function (){
     if (e.keyCode == 13) {
       var search = $(this).val();
       if (search == "")
-      alert("Insert some text to search");
+        alert("Insert some text to search");
       else {
         var postData =
         {
