@@ -1,20 +1,39 @@
-jQuery(document).ready(function() {
-  jQuery('.tabs .tab-links a').on('click', function(e)  {
-    var currentAttrValue = jQuery(this).attr('href');
+$(document).ready(function(){
+  var postData = {};
+  $.ajax({
+    type: "POST",
+    url: "api/loginInfo.php",
+    contentType: "application/json",
+    data: JSON.stringify(postData),
+    dataType: "json",
+    success: function(data){
+      $('.header').attr('data-id', data.id);
+      $('a[href^="?page=user"]').attr('href', "?page=user&id=" + data.id);
+      loadEvents();
+      changeTabs();
+    }
+  });
+});
+
+function changeTabs(){
+  $('.tabs .tab-links a').on('click', function(e)  {
+    var currentAttrValue = $(this).attr('href');
 
     // Show/Hide Tabs
-    jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+    $('.tabs ' + currentAttrValue).show().siblings().hide();
 
     // Change/remove current tab to active
-    jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+    $(this).parent('li').addClass('active').siblings().removeClass('active');
 
     e.preventDefault();
   });
+}
 
-
-  var id = localStorage.getItem('loggedID');
-  var postData = {
-    "idUser" : id
+function loadEvents(){
+  var id= $('.header').data("id");
+  var postData =
+  {
+    "idUser":id
   }
   $.ajax({
     type: "POST",
@@ -26,17 +45,23 @@ jQuery(document).ready(function() {
       if (data.error)
       alert('error');
       else {
+        var date = new Date();
+        var currentDate=date.getFullYear()+"-"+pad(date.getMonth()+1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes());
         var result = "";
         for(var i = 0; i < data.length; i++){
-          result += "<tr><td>" + data[i].title + "</td>"+
+          result = "<tr><td>" + data[i].title + "</td>"+
           "<td>" + data[i].eventDate + "</td>"+
           "<td>" + data[i].eventType + "</td>";
-          if (data[i].isPublic)
-          result += "<td> Public </td></tr>";
+          if (data[i].isPublic == 1)
+          result += "<td> Public </td>";
           else
-          result += "<td> Private </td> </tr>";
+          result += "<td> Private </td>";
+          result += "<td>" + "<a href='?page=event&id=" + data[i].id + "'>See more</a>" + "</td></tr>";
+          if (data[i].eventDate < currentDate)
+            $("#myEventsTablePast").append(result);
+          else
+            $("#myEventsTableFuture").append(result);
         }
-        $("#myEventsTable").append(result);
       }
     },
     error: function(e){
@@ -60,14 +85,20 @@ jQuery(document).ready(function() {
       if (data.error)
       alert('error');
       else {
+        var date = new Date();
+        var currentDate=date.getFullYear()+"-"+pad(date.getMonth()+1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes());
         var result = "";
         for(var i = 0; i < data.length; i++){
-          result += "<tr><td>" + data[i].title + "</td>"+
+          result = "<tr><td>" + data[i].title + "</td>"+
           "<td>" + data[i].name + "</td>"+
           "<td>" + data[i].eventDate + "</td>"+
-          "<td>" + data[i].eventType + "</td></tr>";
+          "<td>" + data[i].eventType + "</td>"+
+          "<td>" + "<a href='?page=event&id=" + data[i].idEvent + "'>See more</a>" + "</td></tr>";
+          if (data[i].eventDate < currentDate)
+            $("#publicEventsTablePast").append(result);
+          else
+            $("#publicEventsTableFuture").append(result);
         }
-        $("#publicEventsTable").append(result);
       }
     },
     error: function(e){
@@ -90,14 +121,20 @@ jQuery(document).ready(function() {
       if (data.error)
       alert('error');
       else {
+        var date = new Date();
+        var currentDate=date.getFullYear()+"-"+pad(date.getMonth()+1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes());
         var result = "";
         for(var i = 0; i < data.length; i++){
-          result += "<tr><td>" + data[i].title + "</td>"+
+          result = "<tr><td>" + data[i].title + "</td>"+
           "<td>" + data[i].name + "</td>"+
           "<td>" + data[i].eventDate + "</td>"+
-          "<td>" + data[i].eventType + "</td></tr>";
+          "<td>" + data[i].eventType + "</td>"+
+          "<td>" + "<a href='?page=event&id=" + data[i].idEvent + "'>See more</a>" + "</td></tr>";
+          if (data[i].eventDate < currentDate)
+            $("#privateEventsTablePast").append(result);
+          else
+            $("#privateEventsTableFuture").append(result);
         }
-        $("#privateEventsTable").append(result);
       }
     },
     error: function(e){
@@ -119,22 +156,32 @@ jQuery(document).ready(function() {
       if (data.error)
       alert('error');
       else {
+        var date = new Date();
+        var currentDate=date.getFullYear()+"-"+pad(date.getMonth()+1)+"-"+pad(date.getUTCDate())+" "+pad(date.getHours())+":"+pad(date.getMinutes());
         var result = "";
         for(var i = 0; i < data.length; i++){
-          result += "<tr><td>" + data[i].title + "</td>"+
+          result = "<tr><td>" + data[i].title + "</td>"+
           "<td>" + data[i].name + "</td>"+
           "<td>" + data[i].eventDate + "</td>"+
           "<td>" + data[i].eventType + "</td>";
-          if (data[i].isPublic)
-            result += "<td> Public </td></tr>";
+          if (data[i].isPublic == 1)
+          result += "<td> Public </td>";
           else
-            result += "<td> Private </td> </tr>";
+          result += "<td> Private </td>";
+          result += "<td>" + "<a href='?page=event&id=" + data[i].idEvent + "'>See more</a>" + "</td></tr>";
+          if (data[i].eventDate < currentDate)
+            $("#allEventsTablePast").append(result);
+          else
+            $("#allEventsTableFuture").append(result);
         }
-        $("#allEventsTable").append(result);
       }
     },
     error: function(e){
       console.log(e);
     }
   });
-});
+}
+
+function pad(d) {
+  return (d < 10) ? '0' + d.toString() : d.toString();
+}

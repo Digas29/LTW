@@ -1,14 +1,12 @@
 <div id="registation">
-  <input type='text' placeholder='Name' id='name'>
-  <input type='date' placeholder='Birthdate' id='birthdate'>
-  <input type='email' placeholder='Email' id='email'>
-  <input type='password' placeholder='Password' id='password'>
-  <input type='password' placeholder='Confirm password' id='passwordConfirmation'>
-  <button id='submit'>Register</button>
+  <p><label for='name'>Name</label><input type='text' id='name'></p>
+  <p><label for='birthdate'>Birthdate</label><input type='date' id='birthdate'></p>
+  <p><label for='email'>Email</label><input type='email' id='email'></p>
+  <p><label for='password'>Password</label><input type='password' id='password'></p>
+  <p><label for='passwordConfirmation'>Confirm password</label><input type='password' id='passwordConfirmation'></p>
+  <p>
+    <button id='submit'>Register</button>
+    <button id='cancel'>Cancel</button>
+  </p>
 </div>
-
-<div class="authentication">
-	<p><a id="link-authentication" href="?page=authentication">Authentication an account</a></p>
-</div>
-
 <script src="js/registation.js"></script>

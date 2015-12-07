@@ -18,11 +18,13 @@
 
 	function createUser($name, $birthdate, $email, $password){
 		global $db;
-		$stmt = $db->prepare('INSERT INTO User (name, birthdate, email, password) VALUES (:name, :birthdate, :email, :securePassword)');
+		$havePhoto = 0;
+		$stmt = $db->prepare('INSERT INTO User (name, birthdate, email, havePhoto, password) VALUES (:name, :birthdate, :email, :havePhoto, :securePassword)');
 		$securePassword = hash("sha256", $password);
 		$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 		$stmt->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
 		$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+		$stmt->bindParam(':havePhoto', $havePhoto, PDO::PARAM_BOOL);
 		$stmt->bindParam(':securePassword', $securePassword, PDO::PARAM_STR);
 		try {
 			$stmt->execute();
@@ -49,7 +51,7 @@
 
 	function getUserById($id){
 		global $db;
-		$stmt = $db->prepare("SELECT name, birthdate, email FROM User WHERE User.id = :id");
+		$stmt = $db->prepare("SELECT name, birthdate, email, havePhoto FROM User WHERE User.id = :id");
 		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		try {
 			$stmt->execute();
@@ -67,6 +69,19 @@
 		$stmt->bindParam(':name', $name, PDO::PARAM_STR);
 		$stmt->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
 		$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+		try {
+			$stmt->execute();
+		} catch (PDOException $e) {
+			return $e->getMessage();
+		}
+	}
+
+	function setPhoto($id){
+		global $db;
+		$havePhoto = 1;
+		$stmt = $db->prepare('UPDATE User SET havePhoto = :havePhoto WHERE id = :id');
+		$stmt->bindParam(':havePhoto', $havePhoto, PDO::PARAM_BOOL);
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 		try {
 			$stmt->execute();
 		} catch (PDOException $e) {

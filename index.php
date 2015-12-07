@@ -1,5 +1,4 @@
 <?php
-include_once('api/config.php');
 
 session_start();
 
@@ -9,10 +8,13 @@ $mandatoryLogin = array('createEvent', 'event', 'eventManager', 'user', 'changeP
 
 foreach ($mandatoryLogin as $page) {
   if ($currentPage === $page && $_SESSION['token'] === null) {
-    header('Location: '. BASE_PATH);
     $currentPage = 'authentication';
     break;
   }
+}
+
+if(isset($_SESSION['token']) && $currentPage == 'authentication'){
+  $currentPage = 'eventManager';
 }
 
 include 'templates/header.php';

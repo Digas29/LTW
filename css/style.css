@@ -1,0 +1,588 @@
+/* _____________________________________________________________________HEADER_________________________________________________________________________________*/
+
+* { box-sizing: border-box }
+
+*:focus {
+	outline: none;
+}
+
+body {
+	font-family: Arial;
+	background-color: #3498DB;
+	width: 1200px;
+	margin: 0 auto;
+}
+/* _____________________________________________________________________NAVIGATION BAR_________________________________________________________________________________*/
+
+.header{
+	padding: 1rem;
+}
+.header ul {
+  list-style: none;
+  background-color: #004C70;
+	overflow: auto;
+	width: 100%;
+	margin: 0;
+  padding: 0;
+}
+.header li {
+  font-family: 'Oswald', sans-serif;
+	border-bottom: none;
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.4em;
+	display: inline-block;
+	width: 10rem;
+	margin-right: -4px;
+	text-align: center;
+}
+
+.header a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+
+.header a:hover {
+  background-color: #006495;
+}
+
+
+.header .container {
+  width: 350px;
+  margin: 0 auto;
+
+	float: right;
+  color: white;
+}
+.header #search {
+  border: none;
+  height: 3rem;
+  padding: 1rem 1.5rem;
+  width: 0;
+  border-radius: 3rem;
+  text-indent: 1.5rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background .2s ease-out, width .2s ease-out;
+  background: rgba(0,0,0,.33) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAZFJREFUeNqk1MsrRFEcwPFjMAwyJKyUmKxslGxsZmPEbDwWbGXDH6DYUFbWypookr/AwuSxYE8pz1DCwitSyPU9/NTP7d6TxqlPc+ae3/11Hr9zjed5RoliGBnc4wPnWESrLzaQ/tOEY8/d5hFzJcz5ympMCzIoNt/N9lfxgAT6UKPGOvBqghoJC9TM7DK7MIFdHKFeYqbVTCdcSx5Sgd3YUf/f0KxeWJHnz6gIS5iRoDWMS/8S/ajyvVArB2XbQFjCGwkYwZ70ex0bvy8xU0HjEbYxLtt5hxjesWXC2738lgQN5uEStWhACmW4CUlmJ1Av/euwU56TJZzJaboKN60OLBm2h0kVNONIVo1TiTtEruumLKmky6hTQRF0qmTvaEfclbBIlY8npWFPc1tVwU8yW7dtUqNjrrucj0k8hdzjA6TQgUf1fFY+Kr/usm7lSKMRpbjCppRSIW4R9b2zgZ6vsb98knxGHStoyCahtRCS9CRismuDWA94/pLtDK1KqcefdoHEfxJaCdm7PembTwEGAAErBY25/RWsAAAAAElFTkSuQmCC) 15px 15px no-repeat;
+
+}
+.header #search:hover {
+	background: white url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXVJREFUeNqkk80rhFEUxq+v8ZF8JGxlplnZKNnYzAZh42Nja4U/gNiYslJ2ypookr/BCAv2ZpryGUpYMIkVGc+t563j7d6TmTn1673ve5/3uffcc64xfyMCZkEK5MAPuAc7oM8UGN3gGuQVtkDtf8x6wYf48QDMg2mwyl3KuYhmVi12ZtMcBUlwDq5AlJo1YZrUDGeEcAycifcv0CO0+/z+CVp8himRyhLHj2AStIW0HSyU1Uz5DF8omANpjieUjLLUrLgmy0Ejx2+s4Dc4UQxzfNa7JiuZnk0lDgZAE3ft20CU42ffiptM4Y7V1GJEFCzhEyWEaF0xawe31F2CCm3lXWG6BzpDaQ4LM3vGg+LsnVEn2ifP1rDVPBVdEJjZvu1njy5qplVgOXQFJRcs2hB4F9835FUscxg38/C7QAN4AsdspRrw6rjLR2CccwXHgpJB3BQZ2x7Tm2INbcqHDsOMKSFa2Y+B2QOImRIjxrNLB2a/AgwAw3yFRFLxpoQAAAAASUVORK5CYII=) no-repeat 15px 15px;
+}
+.header #search:focus {
+	background: white url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXVJREFUeNqkk80rhFEUxq+v8ZF8JGxlplnZKNnYzAZh42Nja4U/gNiYslJ2ypookr/BCAv2ZpryGUpYMIkVGc+t563j7d6TmTn1673ve5/3uffcc64xfyMCZkEK5MAPuAc7oM8UGN3gGuQVtkDtf8x6wYf48QDMg2mwyl3KuYhmVi12ZtMcBUlwDq5AlJo1YZrUDGeEcAycifcv0CO0+/z+CVp8himRyhLHj2AStIW0HSyU1Uz5DF8omANpjieUjLLUrLgmy0Ejx2+s4Dc4UQxzfNa7JiuZnk0lDgZAE3ft20CU42ffiptM4Y7V1GJEFCzhEyWEaF0xawe31F2CCm3lXWG6BzpDaQ4LM3vGg+LsnVEn2ifP1rDVPBVdEJjZvu1njy5qplVgOXQFJRcs2hB4F9835FUscxg38/C7QAN4AsdspRrw6rjLR2CccwXHgpJB3BQZ2x7Tm2INbcqHDsOMKSFa2Y+B2QOImRIjxrNLB2a/AgwAw3yFRFLxpoQAAAAASUVORK5CYII=) no-repeat 15px 15px;
+	width: 100%;
+	outline: none;
+	cursor: text;
+}
+
+/* _____________________________________________________________________Authentication_________________________________________________________________________________*/
+
+.login {
+	margin: 20px auto;
+	width: 300px;
+}
+
+.login-screen {
+	background-color: #FFF;
+	padding: 20px;
+	border-radius: 5px
+}
+
+.app-title {
+	text-align: center;
+	color: #777;
+}
+
+.login-form {
+	text-align: center;
+}
+
+.control-group {
+	margin-bottom: 10px;
+}
+
+.login input {
+	text-align: center;
+	background-color: #ECF0F1;
+	border: 2px solid transparent;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	width: 250px;
+	transition: border .5s;
+}
+
+.login input:focus {
+	border: 2px solid #3498DB;
+	box-shadow: none;
+}
+
+.login #submit {
+  border: 2px solid transparent;
+  background: #3498DB;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.login #submit:hover {
+  background-color: #2980B9;
+}
+
+.login #link-registation #passwordRecuperation {
+  font-size: 12px;
+  color: #444;
+  display: block;
+	margin-top: 12px;
+}
+
+header{
+  height:50px;
+}
+
+footer{
+	position:relative;
+  bottom:0;
+
+}
+
+header{ text-align:center; color:#FFF; font:bold 1.2em/2.5 arial;  font-size: 30px;}
+footer{ text-align:center; color:#FFF; font:bold 0.8em/2.5 arial; }
+
+/* _____________________________________________________________________Event Manager_________________________________________________________________________________*/
+
+/*----- Tabs -----*/
+.tabs {
+  width:100%;
+  display:inline-block;
+}
+
+/*----- Tab Links -----*/
+/* Clearfix */
+.tab-links:after {
+  display:block;
+  clear:both;
+  content:'';
+}
+
+.tab-links li {
+
+  float:left;
+  list-style:none;
+}
+
+.tab-links a {
+  padding:9px 15px;
+  display:inline-block;
+  background:#004C70;
+  font-size:16px;
+  font-weight:600;
+  color:#ffffff;
+  transition:all linear 0.15s;
+	text-decoration:none;
+}
+
+.tab-links a:hover {
+  background:#a7cce5;
+  text-decoration:none;
+}
+
+.tab-links li.active a, .tab-links li.active a:hover {
+  background:#006495;
+  color:#ffffff;
+}
+
+/*----- Content of Tabs -----*/
+.tab-content {
+  margin: 0 auto;
+}
+
+.tab {
+  display:none;
+}
+
+.tab.active {
+  display:block;
+}
+
+table {
+	margin: 0 auto;
+	color: #fff;
+	font-family: Helvetica, Arial, sans-serif;
+	width: 640px;
+	border-collapse:collapse;
+	border-spacing: 0;
+}
+
+td, th {
+	border: 1px solid transparent; /* No more visible border */
+	height: 30px;
+}
+
+th {
+	background: #3F3F3F;  /* Darken header a bit */
+	font-weight: bold;
+}
+
+td {
+	background: #FAFAFA;
+	text-align: center;
+}
+td a{
+	text-decoration: none;
+	color: #fff;
+}
+
+/* Cells in even rows (2,4,6...) are one color */
+tr:nth-child(even) td {
+	background: #313131;
+}
+
+/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
+tr:nth-child(odd) td {
+	background: #464646;
+}
+
+.tab-content h3, .results h3{
+	text-align: center;
+	color: #fff;
+}
+.results {
+	text-align: center;
+	text-decoration: none;
+}
+.results button {
+  background: #3498DB;
+  background-image: -webkit-linear-gradient(top, #3498DB, #004C70);
+  background-image: -moz-linear-gradient(top, #3498DB, #004C70);
+  background-image: -ms-linear-gradient(top, #3498DB, #004C70);
+  background-image: -o-linear-gradient(top, #3498DB, #004C70);
+  background-image: linear-gradient(to bottom, #3498DB, #004C70);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.results button:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+/* _____________________________________________________________________USER PROFILE_________________________________________________________________________________*/
+
+.userInformation{
+	text-align: center;
+	color: #ffffff;
+	font-size:16px;
+}
+.userInformation input {
+	background: transparent;
+  border: none;
+	text-align: center;
+	color: #ffffff;
+	font-size:16px;
+}
+.userInformation #name{
+	font-weight: bold;
+	font-size:25px;
+}
+.userInformation label{
+  display: block;
+  font-size: 20px;
+  transform: translateY(-5px);
+}
+.userInformation p {
+	text-align: center;
+	color: #ffffff;
+	font-size:16px;
+}
+
+.userAdmin{
+	text-align: center;
+	color: #ffffff;
+	font-size:16px;
+}
+
+.userAdmin button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.userAdmin button:hover{
+	cursor: pointer;
+}
+.image{
+	text-align: center;
+	margin: 0 auto;
+}
+.image button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.image button:hover{
+	cursor: pointer;
+}
+/* _____________________________________________________________________NEW PASSWORD_________________________________________________________________________________*/
+
+#authentication{
+	text-align: center;
+	padding-top: 3rem;
+}
+#authentication button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+#authentication button:hover{
+	cursor: pointer;
+}
+#authentication input {
+	border: none;
+	border-bottom: thin solid #ffffff;
+	background: transparent;
+	text-align: center;
+	color: #ffffff;
+	margin-bottom: 1.5rem;
+	width: 20.0em;
+	font-size:16px;
+}
+#authentication input::-webkit-input-placeholder {
+	color: #dfdfdf;
+}
+/* _____________________________________________________________________CREATE EVENT_________________________________________________________________________________*/
+
+#creatEvent{
+	text-align: center;
+	padding-top: 3rem;
+	color: #ffffff;
+}
+#creatEvent button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+#creatEvent button:hover{
+	cursor: pointer;
+}
+#creatEvent input:not([type=radio]){
+	border: none;
+	border-bottom: thin solid #ffffff;
+	background: transparent;
+	text-align: center;
+	color: #ffffff;
+	margin-bottom: 2rem;
+	width: 20.0em;
+	font-size:18px;
+}
+
+#creatEvent label{
+	font-weight: bold;
+  display: block;
+  font-size: 20px;
+  transform: translateY(-10px);
+}
+/* _____________________________________________________________________SIGN UP_________________________________________________________________________________*/
+#registation{
+	text-align: center;
+	padding-top: 3rem;
+	color: #ffffff;
+}
+#registation button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+#registation button:hover{
+	cursor: pointer;
+}
+#registation input{
+	border: none;
+	border-bottom: thin solid #ffffff;
+	background: transparent;
+	text-align: center;
+	color: #ffffff;
+	margin-bottom: 2rem;
+	width: 20.0em;
+	font-size:18px;
+}
+
+#registation label{
+	font-weight: bold;
+  display: block;
+  font-size: 20px;
+  transform: translateY(-10px);
+}
+/* _____________________________________________________________________EVENT_________________________________________________________________________________*/
+.eventInformation{
+	padding-top: 3rem;
+	color: #ffffff;
+}
+.adminOptions{
+	text-align: center;
+	color: #ffffff;
+}
+.adminOptions button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.adminOptions button:hover{
+	cursor: pointer;
+}
+.eventInformation button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.eventInformation button:hover{
+	cursor: pointer;
+}
+.eventInformation input {
+	background: transparent;
+  border: none;
+	color: #ffffff;
+	font-size:18px;
+}
+.eventInformation #title{
+	font-weight: bold;
+	font-size:26px;
+}
+.eventInformation label{
+	font-weight: bold;
+  display: block;
+  font-size: 20px;
+  transform: translateY(-5px);
+}
+.eventPhotos button{
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.eventPhotos button:hover{
+	cursor: pointer;
+}
+.eventPhotos {
+	color: #ffffff;
+	padding-top: 1rem;
+}
+
+.images div {
+	text-align: center;
+	display: inline-block;
+}
+
+.eventPhotos #title{
+	background: transparent;
+	border-bottom: thin solid #ffffff;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	color: #ffffff;
+	font-size:18px;
+}
+
+.invitedUsers p {
+	color: #ffffff;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+.invitedUsers button{
+	text-align: left;
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.invitedUsers button:hover{
+	cursor: pointer;
+}
+.invitedUsers .button{
+	padding-top: 1rem;
+	text-align: center;
+}
+.eventComments p{
+	color: #ffffff;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.eventComments button{
+	text-align: left;
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.eventComments button:hover{
+	cursor: pointer;
+}
+.eventComments input {
+	background: transparent;
+	border-bottom: thin solid #ffffff;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	color: #ffffff;
+	font-size:18px;
+}
+.eventComments input::-webkit-input-placeholder {
+	color: #dfdfdf;
+}
+.share {
+	padding-top: 1rem;
+	text-align: center;
+}
+.share button{
+	text-align: left;
+	color: #ffffff;
+	border: solid 5px #ffffff;
+	cursor: grab;
+	background: transparent;
+	text-transform: uppercase;
+}
+.share button:hover{
+	cursor: pointer;
+}

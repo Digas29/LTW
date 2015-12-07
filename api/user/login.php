@@ -13,7 +13,7 @@ if(isset($body)){
 		$_SESSION['email'] = $result[0]['email'];
 		$_SESSION['id'] = $result[0]['id'];
 		$_SESSION['token'] = $token;
-		$message = array('success' => 'user login','token' => $_SESSION['token'], 'id' => $_SESSION['id']);
+		$message = array('success' => 'user login','token' => $_SESSION['token'],'id' => $_SESSION['id']);
 	}
 	else{
 		$message = array('error' => 'login rejected');
